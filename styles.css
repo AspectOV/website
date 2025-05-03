@@ -1,3 +1,4 @@
+/* Base */
 body {
     font-family: 'Segoe UI', sans-serif;
     line-height: 1.6;
@@ -6,6 +7,16 @@ body {
     color: #222;
     background: #f4f6f8;
     transition: background 0.3s, color 0.3s;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+main {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
 }
 
 /* Header & Footer */
@@ -17,12 +28,6 @@ header, footer {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-main {
-    max-width: 1000px;
-    margin: 2rem auto;
-    padding: 0 1.5rem;
-}
-
 /* Navigation */
 nav {
     position: sticky;
@@ -30,7 +35,7 @@ nav {
     z-index: 10;
     background-color: #222;
     padding: 0.8rem 1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 nav ul {
@@ -146,6 +151,15 @@ input:focus, textarea:focus {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* Resume List Styling */
+.resume-section ul {
+    padding-left: 1.25rem;
+}
+
+.resume-section li {
+    margin-bottom: 0.5rem;
+}
+
 /* Dark Mode */
 .dark-mode {
     background-color: #111;
@@ -181,22 +195,26 @@ input:focus, textarea:focus {
     border-color: #444;
 }
 
-/* Smooth scrolling */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Responsive images and containers */
+/* Responsive images */
 img {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
 }
 
-/* Utilities */
+/* Utility Classes */
 .text-center {
     text-align: center;
 }
+
 .mt-2 {
     margin-top: 2rem;
+}
+
+.mt-4 {
+    margin-top: 4rem;
+}
+
+.mb-2 {
+    margin-bottom: 2rem;
 }
