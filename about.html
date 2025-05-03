@@ -88,30 +88,6 @@
     <i class="fas fa-moon"></i>
   </button>
   
-  <script>
-    // Dark mode toggle
-    const modeToggle = document.getElementById('modeToggle');
-    const body = document.body;
-    const icon = modeToggle.querySelector('i');
-    
-    // Check for saved user preference
-    if (localStorage.getItem('darkMode') === 'true') {
-      body.classList.add('dark-mode');
-      icon.classList.replace('fa-moon', 'fa-sun');
-    }
-    
-    modeToggle.addEventListener('click', () => {
-      body.classList.toggle('dark-mode');
-      
-      // Update icon
-      if (body.classList.contains('dark-mode')) {
-        icon.classList.replace('fa-moon', 'fa-sun');
-        localStorage.setItem('darkMode', 'true');
-      } else {
-        icon.classList.replace('fa-sun', 'fa-moon');
-        localStorage.setItem('darkMode', 'false');
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
