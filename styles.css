@@ -1,0 +1,131 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+header, footer {
+    background-color: #4a90e2;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+h1 {
+    margin: 0;
+}
+
+/* Navigation styling */
+nav {
+    background-color: #333;
+    padding: 0.5rem;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav li {
+    margin: 0 1rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #4a90e2;
+}
+
+/* Button styling */
+.button {
+    display: inline-block;
+    background-color: #4a90e2;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #2a70c2;
+}
+
+/* Add some spacing and borders */
+section {
+    margin: 2rem 0;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+/* Dark mode styling */
+.dark-mode {
+    background-color: #222;
+    color: #eee;
+}
+
+.dark-mode header, .dark-mode footer {
+    background-color: #111;
+}
+
+.dark-mode .button {
+    background-color: #5a6268;
+}
+
+.dark-mode .button:hover {
+    background-color: #7a8288;
+}
+
+/* Form styling */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+/* Project styling */
+.project {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+.dark-mode .project {
+    border-color: #444;
+}
+
+.dark-mode input, .dark-mode textarea {
+    background-color: #333;
+    color: #fff;
+    border-color: #555;
+}
