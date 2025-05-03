@@ -1,47 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - My Website</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects | Jeremy M. Hayes</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
 </head>
 <body>
-    <header>
-        <h1>My Website</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <h1>My Projects</h1>
+  </header>
+  
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  
+  <main>
+    <section id="vr-games">
+      <h2>VR Game Development</h2>
+      <div class="project">
+        <h3>Virtual Quest</h3>
+        <p>A VR adventure game built with Unity that challenges players to solve puzzles in a fantasy world.</p>
+        <p><strong>Technologies:</strong> Unity, C#, Oculus SDK</p>
+        <p><strong>Role:</strong> Game Designer, Developer</p>
+        <a href="#" class="button">View Demo</a>
+      </div>
+      
+      <div class="project">
+        <h3>Space Explorer VR</h3>
+        <p>An educational VR experience that allows users to explore the solar system and learn about celestial bodies.</p>
+        <p><strong>Technologies:</strong> Unreal Engine, C++, Steam VR</p>
+        <p><strong>Role:</strong> Lead Developer, 3D Artist</p>
+        <a href="#" class="button">See Project</a>
+      </div>
+    </section>
     
-    <main>
-        <section>
-            <h2>My Projects</h2>
-            <p>Showcase your work, projects, or portfolio items here.</p>
-            
-            <div class="project">
-                <h3>Project 1</h3>
-                <p>Description of your first project. What did you create? What technologies did you use?</p>
-                <a href="#" class="button">View Details</a>
-            </div>
-            
-            <div class="project">
-                <h3>Project 2</h3>
-                <p>Description of your second project. Share the challenges and achievements.</p>
-                <a href="#" class="button">View Details</a>
-            </div>
-        </section>
-    </main>
+    <section id="3d-models">
+      <h2>3D Modeling Projects</h2>
+      <div class="project">
+        <h3>Character Asset Pack</h3>
+        <p>A collection of low-poly character models suitable for mobile and indie games.</p>
+        <p><strong>Tools:</strong> Blender, Substance Painter</p>
+        <p><strong>Features:</strong> Rigged characters, multiple textures, animation-ready</p>
+        <a href="portfolio.html#3d-models" class="button">View Models</a>
+      </div>
+      
+      <div class="project">
+        <h3>Sci-Fi Environment Props</h3>
+        <p>A set of futuristic environment assets for game development and animation.</p>
+        <p><strong>Tools:</strong> Maya, ZBrush</p>
+        <p><strong>Features:</strong> Low-poly with high detail normal maps, PBR textures</p>
+        <a href="portfolio.html#3d-models" class="button">See Gallery</a>
+      </div>
+    </section>
     
-    <footer>
-        <p>&copy; <span id="year">2025</span> My Website. All rights reserved.</p>
-    </footer>
+    <section id="web-dev">
+      <h2>Web Development</h2>
+      <div class="project">
+        <h3>Personal Portfolio</h3>
+        <p>This very website showcasing my work and skills, built with HTML, CSS, and JavaScript.</p>
+        <p><strong>Technologies:</strong> HTML5, CSS3, JavaScript</p>
+        <p><strong>Features:</strong> Responsive design, dark mode, portfolio showcase</p>
+        <p>You're looking at it right now!</p>
+      </div>
+      
+      <div class="project">
+        <h3>Game Review Platform</h3>
+        <p>A web application for users to review and rate games across different platforms.</p>
+        <p><strong>Technologies:</strong> React, Node.js, MongoDB</p>
+        <p><strong>Features:</strong> User authentication, review submission, rating system</p>
+        <a href="#" class="button">Visit Site</a>
+      </div>
+    </section>
     
-    <script src="script.js"></script>
+    <section id="upcoming">
+      <h2>Upcoming Projects</h2>
+      <div class="project">
+        <h3>AR Mobile Game</h3>
+        <p>An augmented reality game that transforms your surroundings into a playable level.</p>
+        <p><strong>Status:</strong> In Development</p>
+        <p><strong>Technologies:</strong> Unity, ARCore, C#</p>
+        <p><strong>Expected Release:</strong> Fall 2025</p>
+      </div>
+      
+      <div class="project">
+        <h3>3D Asset Marketplace</h3>
+        <p>An online platform for game developers to buy, sell, and trade 3D game assets.</p>
+        <p><strong>Status:</strong> Planning Phase</p>
+        <p><strong>Technologies:</strong> React, Firebase, Three.js</p>
+        <p><strong>Expected Beta:</strong> Winter 2025</p>
+      </div>
+    </section>
+  </main>
+  
+  <footer>
+    <p>&copy; 2025 Jeremy M. Hayes. All rights reserved.</p>
+  </footer>
+  
+  <button class="mode-toggle" id="modeToggle">
+    <i class="fas fa-moon"></i>
+  </button>
+  
+  <script>
+    // Dark mode toggle
+    const modeToggle = document.getElementById('modeToggle');
+    const body = document.body;
+    const icon = modeToggle.querySelector('i');
+    
+    // Check for saved user preference
+    if (localStorage.getItem('darkMode') === 'true') {
+      body.classList.add('dark-mode');
+      icon.classList.replace('fa-moon', 'fa-sun');
+    }
+    
+    modeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      
+      // Update icon
+      if (body.classList.contains('dark-mode')) {
+        icon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('darkMode', 'true');
+      } else {
+        icon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('darkMode', 'false');
+      }
+    });
+  </script>
 </body>
 </html>
