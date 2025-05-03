@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | Jeremy M. Hayes</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+</head>
+<body>
+  <header>
+    <h1>Portfolio Gallery</h1>
+  </header>
+  
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  
+  <main>
+    <section>
+      <h2>My Creative Work</h2>
+      <p>Welcome to my portfolio gallery showcasing my best work in game development, 3D modeling, and web design. Click on any item to learn more.</p>
+      
+      <div class="portfolio-gallery" id="3d-models">
+        <div class="portfolio-item">
+          <img src="/api/placeholder/400/320" alt="3D Character Model" />
+          <div class="portfolio-overlay">
+            <h3>Fantasy Character</h3>
+            <p>Low-poly character model created in Blender</p>
+          </div>
+        </div>
+        
+        <div class="portfolio-item">
+          <img src="/api/placeholder/400/320" alt="Sci-Fi Environment" />
+          <div class="portfolio-overlay">
+            <h3>Sci-Fi Corridor</h3>
+            <p>Futuristic environment asset with PBR textures</p>
+          </div>
+        </div>
+        
+        <div class="portfolio-item">
+          <img src="/api/placeholder/400/320" alt="Game UI Design" />
+          <div class="portfolio-overlay">
+            <h3>Game UI Design</h3>
+            <p>User interface concept for mobile RPG</p>
+          </div>
+        </div>
+        
+        <div class="portfolio-item">
+          <img src="/api/placeholder/400/320" alt="VR Game Screenshot" />
+          <div class="portfolio-overlay">
+            <h3>Virtual Quest</h3>
+            <p>Screenshot from Unity VR game</p>
+          </div>
+        </div>
+        
+        <div class="portfolio-item">
+          <img src="/api/placeholder/400/320" alt="Weapon Model" />
+          <div class="portfolio-overlay">
+            <h3>Fantasy Weapon</h3>
+            <p>Game-ready weapon model with textures</p>
+          </div>
+        </div>
+        
+        <div class="portfolio-item">
+          <img src="/api/placeholder/400/320" alt="Website Design" />
+          <div class="portfolio-overlay">
+            <h3>Game Review Website</h3>
+            <p>Web design project built with React</p>
+          </div>
+        </div>
+        
+        <div class="portfolio-item">
+          <img src="/api/placeholder/400/320" alt="3D Environment" />
+          <div class="portfolio-overlay">
+            <h3>Fantasy Environment</h3>
+            <p>3D environment assets for RPG games</p>
+          </div>
+        </div>
+        
+        <div class="portfolio-item">
+          <img src="/api/placeholder/400/320" alt="Mobile Game UI" />
+          <div class="portfolio-overlay">
+            <h3>Mobile Game Interface</h3>
+            <p>UI/UX design for mobile strategy game</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section>
+      <h2>Video Showcase</h2>
+      <p>Check out these short video demonstrations of my projects in action.</p>
+      
+      <div class="project">
+        <h3>VR Game Demo Reel</h3>
+        <p>A compilation of gameplay footage from my VR projects.</p>
+        <div class="video-placeholder" style="background-color: #000; height: 400px; display: flex; align-items: center; justify-content: center;">
+          <p style="color: #fff;">Video Demo Would Appear Here</p>
+        </div>
+      </div>
+      
+      <div class="project">
+        <h3>3D Animation Demo</h3>
+        <p>Character animations and environment walkthroughs.</p>
+        <div class="video-placeholder" style="background-color: #000; height: 400px; display: flex; align-items: center; justify-content: center;">
+          <p style="color: #fff;">Animation Demo Would Appear Here</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <footer>
+    <p>&copy; 2025 Jeremy M. Hayes. All rights reserved.</p>
+  </footer>
+  
+  <button class="mode-toggle" id="modeToggle">
+    <i class="fas fa-moon"></i>
+  </button>
+  
+  <script>
+    // Dark mode toggle
+    const modeToggle = document.getElementById('modeToggle');
+    const body = document.body;
+    const icon = modeToggle.querySelector('i');
+    
+    // Check for saved user preference
+    if (localStorage.getItem('darkMode') === 'true') {
+      body.classList.add('dark-mode');
+      icon.classList.replace('fa-moon', 'fa-sun');
+    }
+    
+    modeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      
+      // Update icon
+      if (body.classList.contains('dark-mode')) {
+        icon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('darkMode', 'true');
+      } else {
+        icon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('darkMode', 'false');
+      }
+    });
+  </script>
+</body>
+</html>
