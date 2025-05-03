@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jeremy M. Hayes | Developer Portfolio</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
 </head>
 <body>
   <header>
     <h1>Jeremy M. Hayes</h1>
     <p>Developer | Game Designer | 3D Modeler</p>
   </header>
-
+  
   <nav>
     <ul>
       <li><a href="index.html">Home</a></li>
@@ -22,49 +22,89 @@
       <li><a href="contact.html">Contact</a></li>
     </ul>
   </nav>
-
+  
   <main>
     <section>
       <h2>Welcome</h2>
       <p>I'm Jeremy (aka Aspectov), a motivated high school developer with a passion for scripting, game design, and 3D modeling. This is my digital space to showcase my work and connect with others in the industry.</p>
+      <div class="mt-2">
+        <a href="projects.html" class="button">View My Projects</a>
+        <a href="contact.html" class="button" style="margin-left: 1rem;">Get In Touch</a>
+      </div>
+    </section>
+    
+    <section>
+      <h2>Featured Work</h2>
+      <div class="project-grid">
+        <div class="project">
+          <h3>VR Game Development</h3>
+          <p>Creating immersive virtual reality experiences using Unity and Unreal Engine.</p>
+          <a href="projects.html#vr-games" class="button">Learn More</a>
+        </div>
+        
+        <div class="project">
+          <h3>3D Asset Creation</h3>
+          <p>Designing and modeling 3D assets for games and interactive applications.</p>
+          <a href="portfolio.html#3d-models" class="button">View Portfolio</a>
+        </div>
+        
+        <div class="project">
+          <h3>Web Development</h3>
+          <p>Building responsive and interactive websites like this portfolio.</p>
+          <a href="projects.html#web-dev" class="button">See Examples</a>
+        </div>
+      </div>
+    </section>
+    
+    <section>
+      <h2>Skills</h2>
+      <div class="skills-container">
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">HTML/CSS</span>
+        <span class="skill-tag">Unity</span>
+        <span class="skill-tag">Unreal Engine</span>
+        <span class="skill-tag">Blender</span>
+        <span class="skill-tag">3D Modeling</span>
+        <span class="skill-tag">UI/UX Design</span>
+        <span class="skill-tag">Game Development</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">C#</span>
+      </div>
     </section>
   </main>
-
+  
   <footer>
     <p>&copy; 2025 Jeremy M. Hayes. All rights reserved.</p>
   </footer>
-</body>
-</html>
-
-<!-- about.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About | Jeremy M. Hayes</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <header><h1>About Me</h1></header>
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="portfolio.html">Portfolio</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
-  <main>
-    <section>
-      <h2>Background</h2>
-      <p>I’m a student at York Community High School, graduating in 2027. I'm interested in building interactive games, designing game assets, and learning more about computer science and software engineering.</p>
-      <p>I enjoy competing in SkillsUSA, wrestling, and practicing Jiu Jitsu. I’m also certified in CompTIA Tech+, RDF Programming, and Lenovo Laptop Repair.</p>
-    </section>
-  </main>
-  <footer>
-    <p>&copy; 2025 Jeremy M. Hayes</p>
-  </footer>
+  
+  <button class="mode-toggle" id="modeToggle">
+    <i class="fas fa-moon"></i>
+  </button>
+  
+  <script>
+    // Dark mode toggle
+    const modeToggle = document.getElementById('modeToggle');
+    const body = document.body;
+    const icon = modeToggle.querySelector('i');
+    
+    // Check for saved user preference
+    if (localStorage.getItem('darkMode') === 'true') {
+      body.classList.add('dark-mode');
+      icon.classList.replace('fa-moon', 'fa-sun');
+    }
+    
+    modeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      
+      // Update icon
+      if (body.classList.contains('dark-mode')) {
+        icon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('darkMode', 'true');
+      } else {
+        icon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('darkMode', 'false');
+      }
+    });
+  </script>
 </body>
 </html>
