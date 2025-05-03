@@ -1,42 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me - My Website</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Jeremy M. Hayes</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
 </head>
 <body>
-    <header>
-        <h1>My Website</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <h1>About Me</h1>
+  </header>
+  
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  
+  <main>
+    <section>
+      <h2>Background</h2>
+      <p>I'm a student at York Community High School, graduating in 2027. I'm interested in building interactive games, designing game assets, and learning more about computer science and software engineering.</p>
+      <p>I enjoy competing in SkillsUSA, wrestling, and practicing Jiu Jitsu. I'm also certified in CompTIA Tech+, RDF Programming, and Lenovo Laptop Repair.</p>
+    </section>
     
-    <main>
-        <section>
-            <h2>About Me</h2>
-            <p>This is the about page where you can share information about yourself or your organization.</p>
-            <p>Some topics you might cover:</p>
-            <ul>
-                <li>Your background and experience</li>
-                <li>Education and skills</li>
-                <li>Interests and hobbies</li>
-                <li>Vision and goals</li>
-            </ul>
-        </section>
-    </main>
+    <section class="resume-section">
+      <h2>Education</h2>
+      <h3>York Community High School</h3>
+      <p>Expected Graduation: 2027</p>
+      <p>Relevant Coursework:</p>
+      <ul>
+        <li>AP Computer Science Principles</li>
+        <li>Digital Media Production</li>
+        <li>Game Design Fundamentals</li>
+        <li>3D Modeling & Animation</li>
+      </ul>
+    </section>
     
-    <footer>
-        <p>&copy; <span id="year">2025</span> My Website. All rights reserved.</p>
-    </footer>
+    <section class="resume-section">
+      <h2>Technical Skills</h2>
+      <div class="skills-container">
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">HTML/CSS</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">C#</span>
+        <span class="skill-tag">Unity</span>
+        <span class="skill-tag">Unreal Engine</span>
+        <span class="skill-tag">Blender</span>
+        <span class="skill-tag">Maya</span>
+        <span class="skill-tag">Adobe Creative Suite</span>
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">React</span>
+      </div>
+      
+      <h3 class="mt-2">Certifications</h3>
+      <ul>
+        <li>CompTIA Tech+</li>
+        <li>RDF Programming</li>
+        <li>Lenovo Laptop Repair</li>
+      </ul>
+    </section>
     
-    <script src="script.js"></script>
+    <section>
+      <h2>Hobbies & Interests</h2>
+      <p>When I'm not coding or designing, you can find me:</p>
+      <ul>
+        <li>Competing in SkillsUSA competitions</li>
+        <li>Practicing wrestling and Jiu Jitsu</li>
+        <li>Playing and analyzing video games</li>
+        <li>Exploring new technologies in AR/VR</li>
+        <li>Contributing to open-source game projects</li>
+      </ul>
+    </section>
+  </main>
+  
+  <footer>
+    <p>&copy; 2025 Jeremy M. Hayes</p>
+  </footer>
+  
+  <button class="mode-toggle" id="modeToggle">
+    <i class="fas fa-moon"></i>
+  </button>
+  
+  <script>
+    // Dark mode toggle
+    const modeToggle = document.getElementById('modeToggle');
+    const body = document.body;
+    const icon = modeToggle.querySelector('i');
+    
+    // Check for saved user preference
+    if (localStorage.getItem('darkMode') === 'true') {
+      body.classList.add('dark-mode');
+      icon.classList.replace('fa-moon', 'fa-sun');
+    }
+    
+    modeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      
+      // Update icon
+      if (body.classList.contains('dark-mode')) {
+        icon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('darkMode', 'true');
+      } else {
+        icon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('darkMode', 'false');
+      }
+    });
+  </script>
 </body>
 </html>
