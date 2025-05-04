@@ -8,9 +8,90 @@
   <link rel="icon" href="websitelogo.png" type="image/png">
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+  <style>
+    .cursor-style-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    
+    .cursor-style-button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .cursor-style-button.default {
+      background-color: var(--color-accent);
+      color: white;
+    }
+    
+    .cursor-style-button.neon {
+      background-color: #39FF14;
+      color: black;
+    }
+    
+    .cursor-style-button.minimal {
+      background-color: #333;
+      color: white;
+      border: 1px solid #555;
+    }
+    
+    .cursor-style-button.square {
+      background-color: #FF5555;
+      color: white;
+    }
+    
+    .cursor-style-button.gradient {
+      background: linear-gradient(45deg, #FF3366, #FF9933);
+      color: white;
+    }
+    
+    .section-demo {
+      padding: 30px;
+      margin: 20px 0;
+      border-radius: var(--radius-md);
+      text-align: center;
+      background-color: var(--color-bg-secondary);
+    }
+    
+    .section-demo h3 {
+      margin-bottom: 15px;
+    }
+    
+    .section-demo.neon {
+      border: 2px solid #39FF14;
+    }
+    
+    .section-demo.square {
+      border: 2px solid #FF5555;
+    }
+    
+    .section-demo.gradient {
+      border: 2px solid transparent;
+      background-clip: padding-box;
+      position: relative;
+    }
+    
+    .section-demo.gradient::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: -2px;
+      border-radius: inherit;
+      background: linear-gradient(45deg, #FF3366, #FF9933);
+      z-index: -1;
+    }
+  </style>
 </head>
 <body>
-  <script src="cursor.js"></script>
   <header>
     <h1>Jeremy M. Hayes</h1>
     <p>Developer | Game Designer | Programmer</p>
@@ -37,6 +118,34 @@
       <div class="mt-2">
         <a href="projects.html" class="button">View My Projects</a>
         <a href="contact.html" class="button" style="margin-left: 1rem;">Get In Touch</a>
+      </div>
+    </section>
+    
+    <section>
+      <h2>Cursor Style Switcher</h2>
+      <p>Click on a button to change the cursor style:</p>
+      
+      <div class="cursor-style-buttons">
+        <button class="cursor-style-button default" onclick="changeCursorStyle('default')">Default</button>
+        <button class="cursor-style-button neon" onclick="changeCursorStyle('neon')">Neon</button>
+        <button class="cursor-style-button minimal" onclick="changeCursorStyle('minimal')">Minimal</button>
+        <button class="cursor-style-button square" onclick="changeCursorStyle('square')">Square</button>
+        <button class="cursor-style-button gradient" onclick="changeCursorStyle('gradient')">Gradient</button>
+      </div>
+      
+      <div class="section-demo neon" data-cursor="neon">
+        <h3>Neon Cursor Zone</h3>
+        <p>Move your cursor here to automatically switch to the neon style</p>
+      </div>
+      
+      <div class="section-demo square" data-cursor="square">
+        <h3>Square Cursor Zone</h3>
+        <p>Move your cursor here to automatically switch to the square style</p>
+      </div>
+      
+      <div class="section-demo gradient" data-cursor="gradient">
+        <h3>Gradient Cursor Zone</h3>
+        <p>Move your cursor here to automatically switch to the gradient style</p>
       </div>
     </section>
     
@@ -127,6 +236,9 @@
     initAuth0();
   </script>
 
+  <!-- Custom cursor script -->
+  <script src="cursor.js"></script>
+  
   <!-- Your main JavaScript -->
   <script src="script.js"></script>
 </body>
