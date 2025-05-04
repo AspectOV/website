@@ -1,93 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <script src="https://cdn.auth0.com/js/auth0-spa-js/1.19/auth0-spa-js.production.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jeremy Hayes Portfolio</title>
-  <link rel="icon" href="websitelogo.png" type="image/png">
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-</head>
-<body>
-  <header>
-    <h1>Jeremy M. Hayes</h1>
-    <p>Developer | Game Designer | Programmer</p>
-  </header>
-  
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="portfolio.html">Portfolio</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
-  
-  <main>
-    <section>
-      <h2>Welcome</h2>
-      <p>Hi, I'm Jeremy, a passionate high school developer specializing in scripting, game design, and computer science. Welcome to my digital portfolio, where I share my projects and connect with like-minded creators in tech!</p>
-      <div class="mt-2">
-        <a href="projects.html" class="button">View My Projects</a>
-        <a href="contact.html" class="button" style="margin-left: 1rem;">Get In Touch</a>
-      </div>
-    </section>
+// Dark mode functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const modeToggle = document.getElementById('modeToggle');
+    const body = document.body;
+    const icon = modeToggle.querySelector('i');
     
-    <section>
-      <h2>Featured Work</h2>
-      <div class="project-grid">
-        <div class="project portfolio-item">
-          <h3>Roblox Game Development</h3>
-          <p>Crafting high quality Roblox games of all genres using Roblox Studio.</p>
-          <a href="projects.html#vr-games" class="button">Learn More</a>
-          <div class="portfolio-overlay">Roblox Projects</div>
-        </div>
-        
-        <div class="project portfolio-item">
-          <h3>Unity Game Development</h3>
-          <p>Creating immersive game experiences using Unity</p>
-          <a href="portfolio.html#3d-models" class="button">View Portfolio</a>
-          <div class="portfolio-overlay">Unity Portfolio</div>
-        </div>
-        
-        <div class="project portfolio-item">
-          <h3>Web Development</h3>
-          <p>Building responsive and interactive websites like this portfolio.</p>
-          <a href="projects.html#web-dev" class="button">See Examples</a>
-          <div class="portfolio-overlay">Web Projects</div>
-        </div>
-      </div>
-    </section>
+    // Check for saved user preference
+    if (localStorage.getItem('darkMode') === 'true') {
+        body.classList.add('dark-mode');
+        icon.classList.replace('fa-moon', 'fa-sun');
+    }
     
-    <section>
-      <h2>Skills</h2>
-      <div class="skills-container">
-        <span class="skill-tag">JavaScript</span>
-        <span class="skill-tag">HTML</span>
-        <span class="skill-tag">CSS</span>
-        <span class="skill-tag">C#</span>
-        <span class="skill-tag">Lua/Luau</span>
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">Blender</span>
-        <span class="skill-tag">Unity</span>
-        <span class="skill-tag">Windows</span>
-        <span class="skill-tag">Game Development</span>
-        <span class="skill-tag">3D Modeling</span>
-        <span class="skill-tag">UI Design</span>
-      </div>
-    </section>
-  </main>
-  
-  <footer>
-    <p>&copy; 2025 Jeremy M. Hayes. All rights reserved.</p>
-  </footer>
-  
-  <button class="mode-toggle" id="modeToggle">
-    <i class="fas fa-moon"></i>
-  </button>
-  
-  <script src="script.js"></script>
-</body>
-</html>
+    modeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        
+        // Update icon
+        if (body.classList.contains('dark-mode')) {
+            icon.classList.replace('fa-moon', 'fa-sun');
+            localStorage.setItem('darkMode', 'true');
+        } else {
+            icon.classList.replace('fa-sun', 'fa-moon');
+            localStorage.setItem('darkMode', 'false');
+        }
+    });
+    
+    // Form submission handling if contact form exists
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // In a real implementation, this would send data to a server
+            alert('Thank you for your message! I will get back to you soon.');
+            contactForm.reset();
+        });
+    }
+    
+    // Add smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Add animation for sections
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    document.querySelectorAll('section').forEach(section => {
+        section.classList.add('section-hidden');
+        observer.observe(section);
+    });
+    
+    // Add the CSS for animations to the document
+    const style = document.createElement('style');
+    style.textContent = 
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    ;
+    document.head.appendChild(style);
+    
+    // Portfolio image hover effect enhancement
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    if (portfolioItems.length > 0) {
+        portfolioItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.querySelector('.portfolio-overlay').style.transform = 'translateY(0)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.querySelector('.portfolio-overlay').style.transform = 'translateY(100%)';
+            });
+        });
+    }
+});
