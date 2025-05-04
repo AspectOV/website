@@ -13,6 +13,10 @@
   <header>
     <h1>Jeremy M. Hayes</h1>
     <p>Developer | Game Designer | Programmer</p>
+    <div id="authButtons">
+      <button id="loginBtn">Login</button>
+      <button id="logoutBtn" style="display: none;">Logout</button>
+    </div>
   </header>
   
   <nav>
@@ -73,7 +77,6 @@
         <span class="skill-tag">Game Development</span>
         <span class="skill-tag">3D Modeling</span>
         <span class="skill-tag">UI Design</span>
-
       </div>
     </section>
   </main>
@@ -85,7 +88,45 @@
   <button class="mode-toggle" id="modeToggle">
     <i class="fas fa-moon"></i>
   </button>
-  
+
+  <!-- Auth0 integration -->
+  <script>
+    let auth0Client;
+
+    async function initAuth0() {
+      auth0Client = await createAuth0Client({
+        domain: 'YOUR_AUTH0_DOMAIN',
+        client_id: 'YOUR_CLIENT_ID',
+        redirect_uri: window.location.origin
+      });
+
+      if (window.location.search.includes('code=') && window.location.search.includes('state=')) {
+        await auth0Client.handleRedirectCallback();
+        window.history.replaceState({}, document.title, '/');
+      }
+
+      const isAuthenticated = await auth0Client.isAuthenticated();
+
+      if (isAuthenticated) {
+        const user = await auth0Client.getUser();
+        document.getElementById('loginBtn').style.display = 'none';
+        document.getElementById('logoutBtn').style.display = 'inline-block';
+        console.log('Logged in as:', user);
+      }
+    }
+
+    document.getElementById('loginBtn').addEventListener('click', () => {
+      auth0Client.loginWithRedirect();
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      auth0Client.logout({ returnTo: window.location.origin });
+    });
+
+    initAuth0();
+  </script>
+
+  <!-- Your main JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>
