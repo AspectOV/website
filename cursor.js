@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ringX += (mouseX - ringX) * 0.15
     ringY += (mouseY - ringY) * 0.15
 
-    // Apply positions
+    // Apply positions - both centered at the same point
     cursorDot.style.transform = `translate(${dotX}px, ${dotY}px)`
     cursorRing.style.transform = `translate(${ringX}px, ${ringY}px)`
 
@@ -124,4 +124,17 @@ document.addEventListener("DOMContentLoaded", () => {
   // Re-add listeners when DOM changes (for dynamic content)
   const observer = new MutationObserver(addInteractiveListeners)
   observer.observe(document.body, { childList: true, subtree: true })
+  
+  // Force dark background on all elements
+  const forceDarkBackground = () => {
+    // Apply to all list elements
+    const listElements = document.querySelectorAll('ul, ol, li')
+    listElements.forEach(el => {
+      el.style.backgroundColor = 'transparent'
+    })
+  }
+  
+  // Run initially and on scroll
+  forceDarkBackground()
+  window.addEventListener('scroll', forceDarkBackground)
 })
