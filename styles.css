@@ -46,6 +46,7 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 4rem; /* Accounts for fixed header */
   font-size: 16px;
+  background-color: var(--color-bg-primary);
 }
 
 body {
@@ -62,6 +63,7 @@ main {
   max-width: 1200px;
   margin: var(--space-lg) auto;
   padding: 0 var(--space-md);
+  background-color: var(--color-bg-primary);
 }
 
 /* Typography */
@@ -163,10 +165,12 @@ nav ul {
   margin: 0;
   padding: 0;
   gap: var(--space-md);
+  background-color: transparent !important;
 }
 
 nav li {
   margin: 0;
+  background-color: transparent !important;
 }
 
 nav a {
@@ -372,11 +376,13 @@ textarea {
 .resume-section ul {
   padding-left: 1.25rem;
   list-style-type: none;
+  background-color: transparent !important;
 }
 
 .resume-section li {
   margin-bottom: var(--space-sm);
   position: relative;
+  background-color: transparent !important;
 }
 
 .resume-section li::before {
@@ -724,6 +730,11 @@ img {
 
 /* Add this at the end of your CSS file */
 
+/* Fix for UL background issue - more aggressive */
+ul, ol, li, nav ul, nav li {
+  background-color: transparent !important;
+}
+
 /* Custom Cursor */
 html,
 body {
@@ -742,26 +753,7 @@ select,
   cursor: none;
 }
 
-/* Fix for UL background issue */
-ul,
-ol,
-li {
-  background-color: inherit;
-}
-
-nav ul {
-  background-color: transparent;
-}
-
-/* Make sure all list elements maintain the dark theme */
-nav ul,
-nav li,
-.resume-section ul,
-.resume-section li {
-  background-color: transparent;
-}
-
-/* Ensure cursor is visible */
+/* Ensure cursor is visible and centered */
 .cursor-dot {
   position: fixed;
   top: 0;
