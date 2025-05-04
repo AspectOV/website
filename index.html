@@ -235,10 +235,10 @@
   <script>
     let auth0Client;
 
-      async function initAuth0() {
+        async function initAuth0() {
         auth0Client = await createAuth0Client({
-          domain: import.meta.env.VITE_AUTH0_DOMAIN,
-          client_id: import.meta.env.VITE_AUTH0_CLIENT_ID,
+          domain: window.env.AUTH0_DOMAIN,
+          client_id: window.env.AUTH0_CLIENT_ID,
           redirect_uri: window.location.origin
         });
       }
@@ -269,20 +269,17 @@
     initAuth0();
   </script>
 
-  <!-- Custom cursor script -->
   <script src="cursor.js"></script>
+
+  <script src="env.js"></script>
   
-  <!-- Your main JavaScript -->
   <script src="script.js"></script>
   
-  <!-- Fallback for cursor style switcher -->
   <script>
-    // Ensure the changeCursorStyle function is available
     if (typeof window.changeCursorStyle !== 'function') {
       window.changeCursorStyle = function(style) {
         console.log('Changing cursor style to:', style);
         
-        // Default implementation if cursor.js doesn't provide one
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorRing = document.querySelector('.cursor-ring');
         
@@ -291,7 +288,6 @@
           return;
         }
         
-        // Remove all style classes
         const styles = ['default', 'neon', 'minimal', 'square', 'gradient'];
         styles.forEach(s => {
           cursorDot.classList.remove(`cursor-${s}`);
