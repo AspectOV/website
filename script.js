@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const modeToggle = document.getElementById('modeToggle');
     const icon = modeToggle?.querySelector('i');
 
-    // Dark mode
+    // Dark mode G
     if (localStorage.getItem('darkMode') === 'true') {
         body.classList.add('dark-mode');
         icon?.classList.replace('fa-moon', 'fa-sun');
