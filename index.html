@@ -139,13 +139,12 @@
   <script>
     let auth0Client;
 
-        async function initAuth0() {
-        auth0Client = await createAuth0Client({
-          domain: window.env.AUTH0_DOMAIN,
-          client_id: window.env.AUTH0_CLIENT_ID,
-          redirect_uri: window.location.origin
-        });
-      }
+    async function initAuth0() {
+      auth0Client = await createAuth0Client({
+        domain: window.env.AUTH0_DOMAIN,
+        client_id: window.env.AUTH0_CLIENT_ID,
+        redirect_uri: window.location.origin
+      });
 
       if (window.location.search.includes('code=') && window.location.search.includes('state=')) {
         await auth0Client.handleRedirectCallback();
@@ -173,73 +172,7 @@
     initAuth0();
   </script>
 
-  <script src="cursor.js"></script>
-
   <script src="env.js"></script>
-  
   <script src="script.js"></script>
-  
-  <script>
-    if (typeof window.changeCursorStyle !== 'function') {
-      window.changeCursorStyle = function(style) {
-        console.log('Changing cursor style to:', style);
-        
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorRing = document.querySelector('.cursor-ring');
-        
-        if (!cursorDot || !cursorRing) {
-          console.warn('Cursor elements not found. Make sure cursor.js is loaded correctly.');
-          return;
-        }
-        
-        const styles = ['default', 'neon', 'minimal', 'square', 'gradient'];
-        styles.forEach(s => {
-          cursorDot.classList.remove(`cursor-${s}`);
-          cursorRing.classList.remove(`cursor-${s}`);
-        });
-        
-        // Add the new style class
-        cursorDot.classList.add(`cursor-${style}`);
-        cursorRing.classList.add(`cursor-${style}`);
-        
-        // Apply basic styles based on the selected style
-        switch(style) {
-          case 'neon':
-            cursorDot.style.backgroundColor = '#39FF14';
-            cursorDot.style.boxShadow = '0 0 15px rgba(57, 255, 20, 0.7)';
-            cursorRing.style.border = '2px solid rgba(57, 255, 20, 0.5)';
-            break;
-          case 'minimal':
-            cursorDot.style.backgroundColor = 'white';
-            cursorDot.style.boxShadow = '0 0 5px rgba(255, 255, 255, 0.5)';
-            cursorRing.style.border = '1px solid rgba(255, 255, 255, 0.3)';
-            break;
-          case 'square':
-            cursorDot.style.backgroundColor = '#FF5555';
-            cursorDot.style.borderRadius = '0';
-            cursorDot.style.boxShadow = '0 0 10px rgba(255, 85, 85, 0.5)';
-            cursorRing.style.border = '2px solid rgba(255, 85, 85, 0.5)';
-            cursorRing.style.borderRadius = '0';
-            break;
-          case 'gradient':
-            cursorDot.style.background = 'linear-gradient(45deg, #FF3366, #FF9933)';
-            cursorDot.style.boxShadow = '0 0 12px rgba(255, 51, 102, 0.6)';
-            cursorRing.style.border = 'none';
-            cursorRing.style.background = 'linear-gradient(45deg, rgba(255, 51, 102, 0.2), rgba(255, 153, 51, 0.2))';
-            cursorRing.style.boxShadow = '0 0 0 1px rgba(255, 51, 102, 0.3)';
-            break;
-          default: // default style
-            cursorDot.style.backgroundColor = 'var(--color-accent, #5a5aff)';
-            cursorDot.style.borderRadius = '50%';
-            cursorDot.style.boxShadow = '0 0 10px rgba(90, 90, 255, 0.5)';
-            cursorRing.style.border = '2px solid rgba(90, 90, 255, 0.5)';
-            cursorRing.style.borderRadius = '50%';
-            cursorRing.style.background = 'transparent';
-            break;
-        }
-      };
-    }
-    
-  </script>
 </body>
 </html>
