@@ -144,7 +144,7 @@ nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: var(--color-bg-nav);
+  background-color: var(--color-bg-nav, #1e1e1e); /* Fallback added */
   padding: var(--space-sm) var(--space-md);
   box-shadow: var(--shadow-sm);
   backdrop-filter: blur(10px);
@@ -152,9 +152,10 @@ nav {
   transition: background-color var(--transition-normal), padding var(--transition-normal);
 }
 
+/* When page is scrolled */
 nav.scrolled {
   padding: 0.6rem var(--space-md);
-  background-color: rgba(0, 0, 0, 0.95);
+  background-color: rgba(30, 30, 30, 0.95); /* Updated for better dark transparency */
 }
 
 nav ul {
@@ -165,12 +166,12 @@ nav ul {
   margin: 0;
   padding: 0;
   gap: var(--space-md);
-  background-color: transparent !important;
+  background-color: transparent;
 }
 
 nav li {
   margin: 0;
-  background-color: transparent !important;
+  background-color: transparent;
 }
 
 nav a {
