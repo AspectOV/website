@@ -240,20 +240,6 @@
       };
     }
     
-    // Add event listeners for data-cursor elements
-    document.addEventListener('DOMContentLoaded', function() {
-      const customCursorElements = document.querySelectorAll('[data-cursor]');
-      customCursorElements.forEach((el) => {
-        const cursorType = el.getAttribute('data-cursor');
-        el.addEventListener('mouseover', () => {
-          window.changeCursorStyle(cursorType);
-        });
-        
-        el.addEventListener('mouseout', () => {
-          window.changeCursorStyle('default');
-        });
-      });
-    });
   </script>
 </body>
 </html>
