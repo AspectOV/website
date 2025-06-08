@@ -1,251 +1,240 @@
-/* CSS Variables for theming */
 :root {
-  /* Colors */
-  --color-bg-primary: #111111;
-  --color-bg-secondary: #1e1e1e;
-  --color-bg-tertiary: #252525;
-  --color-bg-nav: rgba(0, 0, 0, 0.9);
-  --color-text-primary: #e0e0e0;
-  --color-text-secondary: #cccccc;
-  --color-accent: #5a5aff;
-  --color-accent-hover: #7a7aff;
-  --color-border: #444444;
+  --color-bg: #fff;
+  --color-bg-variant: #f0f0f0;
+  --color-primary: #1e90ff;
+  --color-primary-variant: rgba(30, 144, 255, 0.4);
+  --color-white: #fff;
+  --color-light: rgba(0, 0, 0, 0.6);
+  --color-bg-nav: rgba(17, 17, 17, 0.95);
 
-  /* Shadows */
-  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.4);
+  --transition: all 400ms ease;
 
-  /* Transitions */
-  --transition-fast: 0.2s ease;
-  --transition-normal: 0.3s ease;
-  --transition-slow: 0.5s ease;
-
-  /* Spacing */
-  --space-xs: 0.5rem;
-  --space-sm: 1rem;
-  --space-md: 1.5rem;
-  --space-lg: 2rem;
-  --space-xl: 3rem;
-
-  /* Border Radius */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-full: 9999px;
-}
-
-/* Base Styles */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 4rem; /* Accounts for fixed header */
-  font-size: 16px;
-  background-color: var(--color-bg-primary);
+  --container-width-lg: 75%;
+  --container-width-md: 86%;
+  --container-width-sm: 90%;
 }
 
 body {
-  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;
-  color: var(--color-text-primary);
-  background: var(--color-bg-primary);
-  transition: background-color var(--transition-normal);
+  font-family: "Poppins", sans-serif;
+  background: var(--color-bg);
+  color: var(--color-light);
+  line-height: 1.7;
+  overflow-x: hidden;
 }
 
-main {
-  max-width: 1200px;
-  margin: var(--space-lg) auto;
-  padding: 0 var(--space-md);
-  background-color: var(--color-bg-primary);
+/* General styles */
+.container {
+  width: var(--container-width-lg);
+  margin: 0 auto;
 }
 
-/* Typography */
 h1,
 h2,
 h3,
 h4,
-h5,
-h6 {
-  margin: 0 0 var(--space-md);
-  font-weight: 700;
-  line-height: 1.2;
+h5 {
+  font-weight: 500;
 }
 
 h1 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: 2.5rem;
+  color: black;
 }
 
-h2 {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
+section {
+  margin-top: 8rem;
 }
 
-h3 {
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
+section > h2,
+section > h5 {
+  text-align: center;
+  color: black;
 }
 
-p {
-  margin: 0 0 var(--space-md);
+section > h2 {
+  color: var(--color-primary);
+  margin-bottom: 3rem;
+}
+
+.text-light {
+  color: var(--color-light);
 }
 
 a {
-  color: var(--color-accent);
-  text-decoration: none;
-  transition: color var(--transition-fast);
+  color: var(--color-primary);
+  transition: var(--transition);
 }
 
 a:hover {
-  color: var(--color-accent-hover);
+  color: var(--color-white);
 }
 
-/* Header & Footer */
-header,
-footer {
-  background: linear-gradient(135deg, #111, #222);
-  color: white;
-  text-align: center;
-  padding: var(--space-xl) var(--space-md);
-  box-shadow: var(--shadow-sm);
-  position: relative;
-  overflow: hidden;
+.btn {
+  width: max-content;
+  display: inline-block;
+  color: var(--color-primary);
+  padding: 0.75rem 1.2rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  border: 1px solid var(--color-primary);
+  transition: var(--transition);
 }
 
-header::before,
-footer::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(90, 90, 255, 0.1), transparent 70%);
-  z-index: 0;
+.btn:hover {
+  background: var(--color-white);
+  color: var(--color-bg);
+  border-color: transparent;
 }
 
-header > *,
-footer > * {
-  position: relative;
-  z-index: 1;
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-bg);
 }
 
-footer {
-  margin-top: var(--space-xl);
-  padding: var(--space-xl) var(--space-md);
+img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
 }
 
-/* Navigation */
+/* Navigation styles */
 nav {
-  position: sticky;
+  background-color: rgba(17, 17, 17, 0.95);
+  width: 100vw;
+  height: 5rem;
+  position: fixed;
   top: 0;
-  z-index: 100;
-  background-color: var(--color-bg-nav, #1e1e1e); /* Fallback added */
-  padding: var(--space-sm) var(--space-md);
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: background-color var(--transition-normal), padding var(--transition-normal);
+  z-index: 10;
 }
 
-/* When page is scrolled */
 nav.scrolled {
-  padding: 0.6rem var(--space-md);
-  background-color: rgba(30, 30, 30, 0.95); /* Updated for better dark transparency */
+  background-color: rgba(17, 17, 17, 0.98) !important;
 }
 
-nav ul {
+.nav__container {
+  height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: var(--space-md);
-  background-color: transparent;
 }
 
-nav li {
-  margin: 0;
-  background-color: transparent;
+.nav__logo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-white);
 }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.05rem;
-  position: relative;
-  padding: var(--space-xs) var(--space-xs);
-  transition: color var(--transition-normal);
+.nav__menu {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
 }
 
-nav a::after {
-  content: "";
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background-color: var(--color-accent);
-  transition: width var(--transition-normal);
+.nav__menu a {
+  font-size: 0.9rem;
+  color: var(--color-white);
 }
 
-nav a:hover {
-  color: var(--color-accent);
+.nav__menu a:hover {
+  color: var(--color-primary);
 }
 
-nav a:hover::after,
-nav a:focus::after,
-nav a.active::after {
-  width: 100%;
+/* Responsive navigation styles (for small screens) */
+nav button {
+  display: none;
 }
 
-/* Focus styles for accessibility */
-a:focus,
-button:focus,
-input:focus,
-textarea:focus,
-select:focus {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
+@media screen and (max-width: 1024px) {
+  .container {
+    width: var(--container-width-md);
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  h2 {
+    font-size: 1.7rem;
+  }
+
+  h3 {
+    font-size: 1.4rem;
+  }
+
+  h4 {
+    font-size: 1.2rem;
+  }
+
+  /* Navigation styles for medium screens */
+  .nav__menu {
+    gap: 3rem;
+  }
 }
 
-/* Sections */
-section {
-  margin: var(--space-xl) 0;
-  padding: var(--space-lg);
-  background: var(--color-bg-secondary);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  transition: transform var(--transition-fast), box-shadow var(--transition-normal);
-  position: relative;
-  overflow: hidden;
-}
+@media screen and (max-width: 600px) {
+  .container {
+    width: var(--container-width-sm);
+  }
 
-section::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--color-accent), transparent);
-  opacity: 0;
-  transition: opacity var(--transition-normal);
-}
+  /* General styles for small screens */
+  section {
+    margin-top: 6rem;
+  }
 
-section:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
-}
+  /* Navigation styles for small screens */
+  nav {
+    height: 4rem;
+  }
 
-section:hover::after {
-  opacity: 1;
+  .nav__logo {
+    font-size: 1.6rem;
+  }
+
+  .nav__menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    flex-direction: column;
+    width: fit-content;
+    height: 100vh;
+    background: var(--color-bg);
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1.5rem;
+    z-index: 3;
+    transform: translateX(100%);
+    transition: var(--transition);
+  }
+
+  .nav__menu li {
+    width: 100%;
+  }
+
+  .nav__menu li a {
+    display: block;
+    padding: 1em;
+    background: var(--color-bg-variant);
+    width: 100%;
+    color: var(--color-light);
+    border-radius: 0;
+  }
+
+  .nav__menu li a:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  nav button {
+    display: inline-block;
+    background: transparent;
+    font-size: 1.8rem;
+    color: var(--color-white);
+    cursor: pointer;
+  }
+
+  nav button#close-menu-btn {
+    display: none;
+  }
 }
 
 /* Buttons */
