@@ -3,18 +3,19 @@
   /* Colors */
   --color-bg-primary: #111111;
   --color-bg-secondary: #1e1e1e;
-  --color-bg-tertiary: #252525;
+  --color-bg-tertiary: #222222; /* Updated */
   --color-bg-nav: rgba(0, 0, 0, 0.9);
   --color-text-primary: #e0e0e0;
   --color-text-secondary: #cccccc;
-  --color-accent: #5a5aff;
-  --color-accent-hover: #7a7aff;
-  --color-border: #444444;
+  --color-accent: #33aabb; /* Updated */
+  --color-accent-hover: #44ccdd; /* Updated */
+  --color-accent-rgb: 51, 170, 187; /* Added */
+  --color-border: #383838; /* Updated */
 
   /* Shadows */
-  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.15); /* Updated */
+  --shadow-md: 0 4px 10px rgba(0,0,0,0.2); /* Updated */
+  --shadow-lg: 0 6px 15px rgba(0,0,0,0.25); /* Updated for section hover */
 
   /* Transitions */
   --transition-fast: 0.2s ease;
@@ -45,7 +46,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 4rem; /* Accounts for fixed header */
-  font-size: 16px;
+  font-size: 15px; /* Updated */
   background-color: var(--color-bg-primary);
 }
 
@@ -64,16 +65,27 @@ main {
   margin: var(--space-lg) auto;
   padding: 0 var(--space-md);
   background-color: var(--color-bg-primary);
+  opacity: 1; /* Default state for page transitions */
+  transition: opacity var(--transition-slow) ease-in-out; /* For page transitions */
+}
+
+main.is-loading {
+  opacity: 0;
 }
 
 /* Typography */
 h1,
 h2,
-h3,
-h4,
+h4, /* h3 separate */
 h5,
 h6 {
   margin: 0 0 var(--space-md);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h3 {
+  margin: 0 0 var(--space-sm); /* Updated */
   font-weight: 700;
   line-height: 1.2;
 }
@@ -86,7 +98,7 @@ h2 {
   font-size: clamp(1.5rem, 4vw, 2.5rem);
 }
 
-h3 {
+h3 { /* Already defined above with new margin, this is just for font-size consistency check */
   font-size: clamp(1.25rem, 3vw, 1.75rem);
 }
 
@@ -111,7 +123,7 @@ footer {
   color: white;
   text-align: center;
   padding: var(--space-xl) var(--space-md);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-sm); /* Uses updated shadow */
   position: relative;
   overflow: hidden;
 }
@@ -124,7 +136,8 @@ footer::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(90, 90, 255, 0.1), transparent 70%);
+  /* Adjusted gradient to use new accent's RGB values */
+  background: radial-gradient(circle at 50% 50%, rgba(var(--color-accent-rgb), 0.1), transparent 70%);
   z-index: 0;
 }
 
@@ -144,18 +157,17 @@ nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: var(--color-bg-nav, #1e1e1e); /* Fallback added */
+  background-color: var(--color-bg-nav, rgba(30, 30, 30, 0.9)); /* Fallback updated slightly */
   padding: var(--space-sm) var(--space-md);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-sm); /* Uses updated shadow */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transition: background-color var(--transition-normal), padding var(--transition-normal);
 }
 
-/* When page is scrolled */
 nav.scrolled {
   padding: 0.6rem var(--space-md);
-  background-color: rgba(30, 30, 30, 0.95); /* Updated for better dark transparency */
+  background-color: rgba(30, 30, 30, 0.95);
 }
 
 nav ul {
@@ -191,12 +203,12 @@ nav a::after {
   height: 2px;
   bottom: -4px;
   left: 0;
-  background-color: var(--color-accent);
+  background-color: var(--color-accent); /* Uses new accent */
   transition: width var(--transition-normal);
 }
 
 nav a:hover {
-  color: var(--color-accent);
+  color: var(--color-accent); /* Uses new accent */
 }
 
 nav a:hover::after,
@@ -208,10 +220,10 @@ nav a.active::after {
 /* Focus styles for accessibility */
 a:focus,
 button:focus,
-input:focus,
-textarea:focus,
-select:focus {
-  outline: 2px solid var(--color-accent);
+input:focus, /* Will be overridden by more specific input rules later */
+textarea:focus, /* Will be overridden by more specific textarea rules later */
+select:focus { /* Will be overridden by more specific select rules later */
+  outline: 2px solid var(--color-accent); /* Uses new accent */
   outline-offset: 2px;
 }
 
@@ -221,31 +233,18 @@ section {
   padding: var(--space-lg);
   background: var(--color-bg-secondary);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-md); /* Uses updated shadow */
   transition: transform var(--transition-fast), box-shadow var(--transition-normal);
   position: relative;
-  overflow: hidden;
+  overflow: hidden; /* Keep for potential future effects, though ::after is removed */
 }
 
-section::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--color-accent), transparent);
-  opacity: 0;
-  transition: opacity var(--transition-normal);
-}
+/* section::after rule removed */
+/* section:hover::after rule removed */
 
 section:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
-}
-
-section:hover::after {
-  opacity: 1;
+  transform: translateY(-3px); /* Updated */
+  box-shadow: var(--shadow-lg); /* Updated to use the new --shadow-lg definition */
 }
 
 /* Buttons */
@@ -253,56 +252,44 @@ section:hover::after {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-accent);
-  color: white;
-  padding: 0.75rem 1.75rem;
-  border-radius: var(--radius-full);
+  background: var(--color-accent); /* Uses new accent */
+  color: #f0f0f0; /* Updated for softer contrast */
+  padding: 0.7rem 1.6rem; /* Updated padding */
+  border-radius: var(--radius-md); /* Updated border-radius */
   font-weight: 600;
   text-decoration: none;
-  box-shadow: 0 0 12px rgba(90, 90, 255, 0.4);
-  transition: all var(--transition-normal);
-  border: none;
+  transition: background-color var(--transition-normal), transform var(--transition-fast);
+  border: 1px solid transparent;
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
+  /* box-shadow removed */
+  /* ::before gradient sweep removed */
 }
 
-.button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.7s ease;
-}
+/* .button::before rule removed */
 
 .button:hover {
-  background: var(--color-accent-hover);
-  box-shadow: 0 0 20px rgba(122, 122, 255, 0.6);
-  transform: translateY(-2px);
-}
-
-.button:hover::before {
-  left: 100%;
+  background: var(--color-accent-hover); /* Uses new accent-hover */
+  transform: translateY(-1px); /* Updated transform */
+  /* No shadow change on hover */
 }
 
 .button:active {
-  transform: translateY(1px);
+  transform: translateY(0px); /* Updated */
 }
 
 /* Secondary button */
 .button.secondary {
   background: transparent;
-  border: 2px solid var(--color-accent);
-  color: var(--color-accent);
-  box-shadow: none;
+  border: 1px solid var(--color-border); /* Uses new border color */
+  color: var(--color-text-secondary);
+  /* box-shadow: none; */ /* Already simple, no change needed */
 }
 
 .button.secondary:hover {
-  background: rgba(90, 90, 255, 0.1);
-  box-shadow: 0 0 12px rgba(90, 90, 255, 0.2);
+  background: rgba(var(--color-accent-rgb), 0.1); /* Uses new accent-rgb */
+  color: var(--color-accent); /* Uses new accent */
+  border-color: var(--color-accent); /* Uses new accent */
+  /* box-shadow: none; */
 }
 
 /* Forms */
@@ -321,9 +308,9 @@ textarea,
 select {
   width: 100%;
   padding: 0.75rem 1rem;
-  background-color: rgba(34, 34, 34, 0.8);
+  background-color: rgba(34, 34, 34, 0.8); /* Keeping this as it's dark and fits */
   color: var(--color-text-primary);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-border); /* Uses new border color */
   border-radius: var(--radius-md);
   font-size: 1rem;
   font-family: inherit;
@@ -334,8 +321,8 @@ input:focus,
 textarea:focus,
 select:focus {
   outline: none;
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 2px rgba(90, 90, 255, 0.2);
+  border-color: var(--color-accent); /* Uses new accent */
+  box-shadow: 0 0 0 2px rgba(var(--color-accent-rgb), 0.25); /* Uses new accent-rgb */
 }
 
 textarea {
@@ -344,17 +331,17 @@ textarea {
 }
 
 ::placeholder {
-  color: #888;
+  color: #888; /* This is fine */
   opacity: 1;
 }
 
 /* Projects */
 .project {
-  background: var(--color-bg-tertiary);
+  background: var(--color-bg-tertiary); /* Uses new bg-tertiary */
   padding: var(--space-md);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-sm); /* Uses new shadow-sm */
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
   border: 1px solid transparent;
   height: 100%;
   display: flex;
@@ -362,8 +349,8 @@ textarea {
 }
 
 .project:hover {
-  box-shadow: var(--shadow-md);
-  border-color: rgba(90, 90, 255, 0.3);
+  box-shadow: var(--shadow-md); /* Uses new shadow-md */
+  border-color: rgba(var(--color-accent-rgb), 0.3); /* Uses new accent-rgb */
   transform: translateY(-3px);
 }
 
@@ -388,7 +375,7 @@ textarea {
 
 .resume-section li::before {
   content: "•";
-  color: var(--color-accent);
+  color: var(--color-accent); /* Uses new accent */
   font-weight: bold;
   position: absolute;
   left: -1.25rem;
@@ -409,7 +396,7 @@ img {
   overflow: hidden;
   border-radius: var(--radius-md);
   aspect-ratio: 16 / 9;
-  background-color: var(--color-bg-tertiary);
+  background-color: var(--color-bg-tertiary); /* Uses new bg-tertiary */
 }
 
 .portfolio-item img {
@@ -424,14 +411,13 @@ img {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 50%, transparent 100%); /* Updated */
   color: white;
   text-align: center;
   padding: var(--space-md);
-  transform: translateY(100%);
-  transition: transform var(--transition-normal);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  opacity: 0; /* Updated */
+  transition: opacity var(--transition-normal); /* Updated */
+  /* backdrop-filter and transform removed */
 }
 
 .portfolio-item:hover img {
@@ -439,28 +425,20 @@ img {
 }
 
 .portfolio-item:hover .portfolio-overlay {
-  transform: translateY(0);
+  opacity: 1; /* Updated */
+  /* transform change removed */
 }
 
-/* Grid Layout */
+/* Grid Layout - No changes needed */
 .grid {
   display: grid;
   gap: var(--space-md);
 }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
 
-.grid-2 {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.grid-3 {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.grid-4 {
-  grid-template-columns: repeat(4, 1fr);
-}
-
-/* Card Component */
+/* Card Component - Uses updated shadows and tertiary bg */
 .card {
   background: var(--color-bg-tertiary);
   border-radius: var(--radius-md);
@@ -469,124 +447,46 @@ img {
   transition: transform var(--transition-normal), box-shadow var(--transition-normal);
   height: 100%;
 }
-
 .card:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-md);
 }
 
-/* Utility Classes */
-.text-center {
-  text-align: center;
-}
-.text-left {
-  text-align: left;
-}
-.text-right {
-  text-align: right;
-}
-
-.mt-1 {
-  margin-top: var(--space-sm);
-}
-.mt-2 {
-  margin-top: var(--space-md);
-}
-.mt-3 {
-  margin-top: var(--space-lg);
-}
-.mt-4 {
-  margin-top: var(--space-xl);
-}
-
-.mb-1 {
-  margin-bottom: var(--space-sm);
-}
-.mb-2 {
-  margin-bottom: var(--space-md);
-}
-.mb-3 {
-  margin-bottom: var(--space-lg);
-}
-.mb-4 {
-  margin-bottom: var(--space-xl);
-}
-
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.p-1 {
-  padding: var(--space-sm);
-}
-.p-2 {
-  padding: var(--space-md);
-}
-.p-3 {
-  padding: var(--space-lg);
-}
-.p-4 {
-  padding: var(--space-xl);
-}
-
-.w-full {
-  width: 100%;
-}
-.h-full {
-  height: 100%;
-}
-
-.flex {
-  display: flex;
-}
-.flex-col {
-  flex-direction: column;
-}
-.items-center {
-  align-items: center;
-}
-.justify-center {
-  justify-content: center;
-}
-.justify-between {
-  justify-content: space-between;
-}
-.gap-1 {
-  gap: var(--space-sm);
-}
-.gap-2 {
-  gap: var(--space-md);
-}
-
-.hidden {
-  display: none;
-}
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
+/* Utility Classes - No changes needed */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.mt-1 { margin-top: var(--space-sm); }
+.mt-2 { margin-top: var(--space-md); }
+.mt-3 { margin-top: var(--space-lg); }
+.mt-4 { margin-top: var(--space-xl); }
+.mb-1 { margin-bottom: var(--space-sm); }
+.mb-2 { margin-bottom: var(--space-md); }
+.mb-3 { margin-bottom: var(--space-lg); }
+.mb-4 { margin-bottom: var(--space-xl); }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.p-1 { padding: var(--space-sm); }
+.p-2 { padding: var(--space-md); }
+.p-3 { padding: var(--space-lg); }
+.p-4 { padding: var(--space-xl); }
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: var(--space-sm); }
+.gap-2 { gap: var(--space-md); }
+.hidden { display: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
 
 /* Animations */
-@keyframes fadeIn {
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+/* Old slideUp keyframes removed */
+@keyframes slideUpSmooth {
   from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(20px);
+    transform: translateY(30px); /* Slightly more travel */
     opacity: 0;
   }
   to {
@@ -594,137 +494,92 @@ img {
     opacity: 1;
   }
 }
-
-.animate-fadeIn {
-  animation: fadeIn 0.5s ease forwards;
+.animate-fadeIn { animation: fadeIn 0.5s ease forwards; }
+/* Old .animate-slideUp class removed */
+.animate-slideUpSmooth {
+  animation: slideUpSmooth 0.7s var(--transition-normal) forwards; /* Slower, using ease (default for transition-normal) */
 }
 
-.animate-slideUp {
-  animation: slideUp 0.5s ease forwards;
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .grid-4 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
+/* Responsive Design - No changes needed, but one rule for section padding will be affected by var(--space-md) */
+@media (max-width: 1024px) { .grid-4 { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 768px) {
-  .grid-3,
-  .grid-4 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .grid-2 {
-    grid-template-columns: 1fr;
-  }
-
-  section {
-    padding: var(--space-md);
-  }
+  .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-2 { grid-template-columns: 1fr; }
+  section { padding: var(--space-md); } /* This padding will use the updated var(--space-md) which is 1.5rem */
 }
-
 @media (max-width: 640px) {
-  html {
-    font-size: 14px;
-  }
-
-  .grid-3,
-  .grid-4 {
-    grid-template-columns: 1fr;
-  }
-
-  nav ul {
-    flex-wrap: wrap;
-  }
-
-  .hidden-sm {
-    display: none;
-  }
+  html { font-size: 14px; } /* Note: This overrides the 15px base. Consider if 15px should also apply here or if 14px is preferred for smallest screens. Keeping as is for now. */
+  .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  nav ul { flex-wrap: wrap; }
+  .hidden-sm { display: none; }
 }
 
-/* Dark mode enhancements */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg-primary: #111111;
-    --color-bg-secondary: #1e1e1e;
-    --color-bg-tertiary: #252525;
-  }
-}
+/* Optional: Add this JavaScript to your page for the scrolled nav effect - Comment can remain */
 
-/* Optional: Add this JavaScript to your page for the scrolled nav effect */
+/* Add this at the end of your CSS file - Comment can remain */
 
-/* Add this at the end of your CSS file */
+/* Custom Scrollbar - Uses updated variables like --color-bg-tertiary and --color-accent */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--color-bg-tertiary); border-radius: var(--radius-sm); }
+::-webkit-scrollbar-thumb { background: #444; border-radius: var(--radius-sm); border: 2px solid var(--color-bg-tertiary); transition: background var(--transition-normal); }
+::-webkit-scrollbar-thumb:hover { background: #555; }
+::-webkit-scrollbar-thumb:active { background: var(--color-accent); }
+::-webkit-scrollbar-corner { background: var(--color-bg-tertiary); }
+* { scrollbar-width: thin; scrollbar-color: #444 var(--color-bg-tertiary); }
 
-/* Custom Scrollbar */
-/* For WebKit browsers (Chrome, Safari, newer versions of Opera, Edge) */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
+/* Optional: Custom scrollbar for specific elements - No changes needed */
+.custom-scrollbar { scrollbar-width: thin; scrollbar-color: #444 var(--color-bg-tertiary); }
+.custom-scrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: var(--color-bg-tertiary); border-radius: var(--radius-sm); }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #444; border-radius: var(--radius-sm); }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #555; }
 
-::-webkit-scrollbar-track {
-  background: var(--color-bg-tertiary);
-  border-radius: var(--radius-sm);
-}
+/* Optional: Hide scrollbar but keep functionality - No changes needed */
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
 
-::-webkit-scrollbar-thumb {
-  background: #444;
-  border-radius: var(--radius-sm);
-  border: 2px solid var(--color-bg-tertiary);
-  transition: background var(--transition-normal);
-}
+/* Styles for .section-demo (previously inline in index.html) - Uses updated variables */
+    .section-demo {
+      padding: 30px;
+      margin: 20px 0;
+      border-radius: var(--radius-md, 10px); /* Fallback for radius-md is fine */
+      text-align: center;
+      background-color: var(--color-bg-tertiary, #252525); /* Fallback for bg-tertiary can be removed if var is guaranteed */
+      transition: all 0.3s ease;
+    }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
+    .section-demo:hover {
+      transform: translateY(-5px); /* This is different from the new section:hover, might be intentional for these demos */
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* This uses a specific shadow, not from variables */
+    }
 
-::-webkit-scrollbar-thumb:active {
-  background: var(--color-accent);
-}
+    .section-demo h3 {
+      margin-bottom: 15px; /* This is specific, not from variables */
+    }
 
-::-webkit-scrollbar-corner {
-  background: var(--color-bg-tertiary);
-}
+    .section-demo.neon {
+      border: 2px solid #39FF14;
+    }
 
-/* For Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #444 var(--color-bg-tertiary);
-}
+    .section-demo.square {
+      border: 2px solid #FF5555;
+    }
 
-/* Optional: Custom scrollbar for specific elements */
-.custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: #444 var(--color-bg-tertiary);
-}
+    .section-demo.gradient {
+      border: 2px solid transparent;
+      background-clip: padding-box;
+      position: relative;
+    }
 
-.custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: var(--color-bg-tertiary);
-  border-radius: var(--radius-sm);
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #444;
-  border-radius: var(--radius-sm);
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-/* Optional: Hide scrollbar but keep functionality */
-.hide-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-.hide-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
-}
+    .section-demo.gradient::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: -2px;
+      border-radius: inherit;
+      background: linear-gradient(45deg, #FF3366, #FF9933);
+      z-index: -1;
+    }
