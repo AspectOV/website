@@ -90,7 +90,7 @@ main {
   max-width: 1200px;
   margin: var(--space-lg) auto;
   padding: 0 var(--space-md);
-  background-color: var(--color-bg-primary);
+  background-color: transparent;
   opacity: 1;
   transition: opacity var(--transition-slow) ease-in-out;
 }
