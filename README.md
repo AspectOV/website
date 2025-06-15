@@ -8,7 +8,7 @@ A modern, responsive personal portfolio to showcase my projects, skills, and pro
 
 ## 🌐 Live Demo
 
-👉 [View the Live Site](https://your-netlify-site-url.com)
+👉 [View the Live Site](https://www.jeremymhayes.com)
 
 ---
 
