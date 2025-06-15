@@ -191,8 +191,30 @@ footer > * {
 }
 
 footer {
-  margin-top: var(--space-xl);
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(135deg, #111, #222);
+  color: white;
+  text-align: center;
   padding: var(--space-xl) var(--space-md);
+  margin-top: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+footer p {
+  margin: var(--space-sm) auto;
+  max-width: 600px;
+  color: var(--color-text-secondary);
+}
+
+footer a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+footer a:hover {
+  color: var(--color-accent-hover);
 }
 
 /* Navigation */
@@ -917,9 +939,9 @@ img {
 }
 
 .social-links a {
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
   font-size: 1.5rem;
-  transition: color var(--transition-normal), transform var(--transition-normal);
+  transition: color var(--transition-fast), transform var(--transition-fast);
 }
 
 .social-links a:hover {
