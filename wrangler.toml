@@ -1,5 +1,8 @@
 name = "jeremymhayes"
-compatibility_date = "2025-06-15"
+main = "workers-site/index.js"  # or remove if no Worker script is needed
+
+type = "javascript"
 
 [site]
-directory = "./dist"
+bucket = "."           # Your static files are in the root folder
+entry-point = "workers-site"  # Can be removed if no Worker scripts
