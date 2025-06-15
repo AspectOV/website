@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Particles array
   const particles = [];
-  const particleCount = 50;
+  const particleCount = 30; // Reduced number of particles
   
   // Particle class
   class Particle {
@@ -20,10 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
     reset() {
       this.x = Math.random() * width;
       this.y = Math.random() * height;
-      this.size = Math.random() * 100 + 50;
-      this.speedX = (Math.random() - 0.5) * 0.5;
-      this.speedY = (Math.random() - 0.5) * 0.5;
-      this.opacity = Math.random() * 0.3 + 0.1;
+      this.size = Math.random() * 150 + 100; // Larger, more subtle particles
+      this.speedX = (Math.random() - 0.5) * 0.2; // Slower movement
+      this.speedY = (Math.random() - 0.5) * 0.2;
+      this.opacity = Math.random() * 0.15 + 0.05; // More subtle opacity
+      this.hue = 190 + Math.random() * 20; // Blue hue range
     }
     
     update() {
@@ -42,8 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
         this.x, this.y, 0,
         this.x, this.y, this.size
       );
-      gradient.addColorStop(0, `rgba(0, 180, 216, ${this.opacity})`);
-      gradient.addColorStop(1, 'rgba(0, 180, 216, 0)');
+      gradient.addColorStop(0, `hsla(${this.hue}, 100%, 50%, ${this.opacity})`);
+      gradient.addColorStop(0.5, `hsla(${this.hue}, 100%, 50%, ${this.opacity * 0.5})`);
+      gradient.addColorStop(1, 'hsla(190, 100%, 50%, 0)');
       ctx.fillStyle = gradient;
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
       ctx.fill();
@@ -58,6 +60,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // Animation loop
   function animate() {
     ctx.clearRect(0, 0, width, height);
+    
+    // Add subtle background gradient
+    const bgGradient = ctx.createLinearGradient(0, 0, 0, height);
+    bgGradient.addColorStop(0, 'rgba(10, 10, 10, 0.95)');
+    bgGradient.addColorStop(1, 'rgba(10, 10, 10, 0.98)');
+    ctx.fillStyle = bgGradient;
+    ctx.fillRect(0, 0, width, height);
     
     particles.forEach(particle => {
       particle.update();
@@ -75,4 +84,4 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Start animation
   animate();
-}); 
+});
