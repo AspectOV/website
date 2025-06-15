@@ -2,5 +2,4 @@ name = "jeremymhayes"
 compatibility_date = "2025-06-15"
 
 [site]
-bucket = "./dist"           # Change to your output directory (e.g., "dist", "build", or ".")
-entry-point = "."           # Leave as-is unless you have workers or custom JS
+directory = "./dist"
