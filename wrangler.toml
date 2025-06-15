@@ -1,8 +1,4 @@
 name = "jeremymhayes"
-main = "workers-site/index.js"  # or remove if no Worker script is needed
-
-type = "javascript"
 
 [site]
-bucket = "."           # Your static files are in the root folder
-entry-point = "workers-site"  # Can be removed if no Worker scripts
+bucket = "."
