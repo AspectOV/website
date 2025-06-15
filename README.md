@@ -1,18 +1,91 @@
-🔐 AspectOV Portfolio Website – Personal Showcase & Contact
+# 🚀 AspectOV Portfolio Website
 
-This repository contains the source code for my personal portfolio website — a clean, modern site designed to showcase my projects, skills, and provide easy ways to get in touch.
+A modern, responsive personal portfolio to showcase my projects, skills, and provide easy ways to connect.
 
-🔧 Features:
+[![Netlify Status](https://api.netlify.com/api/v1/badges/your-badge-here/deploy-status)](https://app.netlify.com/sites/your-site-name/deploys)
 
-Responsive multi-page design with Home, About, Projects, and Contact pages
+---
 
-Interactive portfolio showcasing my apps and projects
+## 🌐 Live Demo
 
-Contact form and links for easy communication
+👉 [View the Live Site](https://your-netlify-site-url.com)
 
-Built with semantic HTML5, CSS3, and vanilla JavaScript
+---
 
-Simple to run locally or deploy anywhere
+## 📋 Table of Contents
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Getting Started](#getting-started)
+- [Deployment](#deployment)
+- [Tech Stack](#tech-stack)
+- [Contact](#contact)
 
-Whether you want to explore my work, learn about me, or reach out, this website provides a polished, user-friendly experience across all devices.
+---
+
+## ✨ Features
+
+- 📱 **Responsive Multi-Page Design** — Home, About, Projects, and Contact
+- 🖼️ **Interactive Portfolio** — Showcases apps and projects with engaging UI
+- 📬 **Contact Form** — Easy ways to reach out, plus social links
+- ⚡ **Fast & Lightweight** — Built with semantic HTML5, CSS3, and vanilla JavaScript
+- 🌙 **Modern Aesthetics** — Clean, accessible, and user-friendly across all devices
+- 🛠️ **Easy Local Setup** — Simple to run and hack on your own machine
+
+---
+
+## 🖼️ Screenshots
+<!-- Add screenshots of your site here -->
+<!-- ![Home Page](screenshots/home.png) -->
+
+---
+
+## 🚀 Getting Started
+
+To run locally:
+
+```bash
+# Clone the repository
+ git clone https://github.com/AspectOV/website.git
+ cd website
+
+# Install dependencies (for local server)
+ npm install
+
+# Start the local server
+ npm start
+
+# Visit http://localhost:8080 in your browser
+```
+
+---
+
+## 🌍 Deployment
+
+This site is automatically deployed via [Netlify](https://www.netlify.com/) from the `main` branch of this repository. Every push triggers a new build and deploy.
+
+- **Domain managed by:** Cloudflare
+- **Continuous Deployment:** Enabled via GitHub → Netlify
+
+---
+
+## 🛠️ Tech Stack
+
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+![Netlify](https://img.shields.io/badge/Netlify-00C7B7?logo=netlify&logoColor=white)
+![Cloudflare](https://img.shields.io/badge/Cloudflare-F38020?logo=cloudflare&logoColor=white)
+
+---
+
+## 🤝 Contact
+
+- Portfolio: [your-domain.com](https://your-domain.com)
+- Email: [your@email.com](mailto:your@email.com)
+- GitHub: [AspectOV](https://github.com/AspectOV)
+- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
+
+---
+
+> © 2024 Jeremy / AspectOV. All rights reserved.
 
