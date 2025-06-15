@@ -2,7 +2,7 @@
 
 A modern, responsive personal portfolio to showcase my projects, skills, and provide easy ways to connect.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/your-badge-here/deploy-status)](https://app.netlify.com/sites/your-site-name/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/2607b326-75cb-4d64-89e8-d1a54507b9f0/deploy-status)](https://app.netlify.com/projects/aspectov/deploys)
 
 ---
 
