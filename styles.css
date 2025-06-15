@@ -46,9 +46,10 @@
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 0;
   background: var(--color-bg-primary);
   overflow: hidden;
+  pointer-events: none;
 }
 
 .animated-backdrop::before {
@@ -59,8 +60,8 @@
   right: 0;
   bottom: 0;
   background: 
-    radial-gradient(circle at 20% 20%, rgba(var(--color-accent-rgb), 0.3) 0%, transparent 70%),
-    radial-gradient(circle at 80% 80%, rgba(var(--color-accent-rgb), 0.3) 0%, transparent 70%);
+    radial-gradient(circle at 20% 20%, rgba(var(--color-accent-rgb), 0.5) 0%, transparent 70%),
+    radial-gradient(circle at 80% 80%, rgba(var(--color-accent-rgb), 0.5) 0%, transparent 70%);
   animation: backdropPulse 8s ease-in-out infinite alternate;
 }
 
@@ -72,23 +73,23 @@
   right: 0;
   bottom: 0;
   background: 
-    radial-gradient(circle at 60% 40%, rgba(var(--color-accent-rgb), 0.2) 0%, transparent 60%),
-    radial-gradient(circle at 40% 60%, rgba(var(--color-accent-rgb), 0.2) 0%, transparent 60%);
+    radial-gradient(circle at 60% 40%, rgba(var(--color-accent-rgb), 0.4) 0%, transparent 60%),
+    radial-gradient(circle at 40% 60%, rgba(var(--color-accent-rgb), 0.4) 0%, transparent 60%);
   animation: backdropPulse 12s ease-in-out infinite alternate-reverse;
 }
 
 @keyframes backdropPulse {
   0% {
     transform: scale(1) translate(0, 0);
-    opacity: 0.7;
+    opacity: 0.8;
   }
   50% {
     transform: scale(1.3) translate(2%, 2%);
-    opacity: 0.9;
+    opacity: 1;
   }
   100% {
     transform: scale(1) translate(-2%, -2%);
-    opacity: 0.7;
+    opacity: 0.8;
   }
 }
 
@@ -117,12 +118,14 @@ body {
 }
 
 main {
+  position: relative;
+  z-index: 1;
   max-width: 1200px;
   margin: var(--space-lg) auto;
   padding: 0 var(--space-md);
   background-color: var(--color-bg-primary);
-  opacity: 1; /* Default state for page transitions */
-  transition: opacity var(--transition-slow) ease-in-out; /* For page transitions */
+  opacity: 1;
+  transition: opacity var(--transition-slow) ease-in-out;
 }
 
 main.is-loading {
@@ -189,13 +192,14 @@ a:hover {
 }
 
 /* Header & Footer */
-header,
-footer {
+header {
+  position: relative;
+  z-index: 1;
   background: linear-gradient(135deg, #111, #222);
   color: white;
   text-align: center;
   padding: var(--space-xl) var(--space-md);
-  box-shadow: var(--shadow-sm); /* Uses updated shadow */
+  box-shadow: var(--shadow-sm);
   position: relative;
   overflow: hidden;
 }
@@ -228,7 +232,7 @@ footer {
 nav {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 2;
   background-color: var(--color-bg-nav);
   padding: var(--space-sm) var(--space-md);
   box-shadow: var(--shadow-sm);
@@ -236,7 +240,6 @@ nav {
   -webkit-backdrop-filter: blur(10px);
   transition: all var(--transition-normal);
   border-bottom: 1px solid var(--color-border);
-  position: relative;
 }
 
 nav.scrolled {
