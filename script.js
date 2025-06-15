@@ -242,4 +242,14 @@ document.addEventListener('DOMContentLoaded', function () {
         script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
         document.body.appendChild(script);
     }
+
+    // Set active page in navigation
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    
+    navLinks.forEach(link => {
+        const linkPage = link.getAttribute('href');
+        if (linkPage === currentPage) {
+            link.setAttribute('aria-current', 'page');
+        }
+    });
 });
