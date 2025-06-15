@@ -183,10 +183,7 @@ nav {
   -webkit-backdrop-filter: blur(10px);
   transition: all var(--transition-normal);
   border-bottom: 1px solid var(--color-border);
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: var(--space-md);
+  position: relative;
 }
 
 nav.scrolled {
@@ -203,7 +200,6 @@ nav ul {
   padding: 0;
   gap: var(--space-md);
   flex-wrap: wrap;
-  grid-column: 2;
 }
 
 nav li {
@@ -798,10 +794,12 @@ img {
 
 /* Search Container */
 .search-container {
+  position: absolute;
+  left: var(--space-md);
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
-  position: relative;
-  grid-column: 1;
 }
 
 #search-input {
