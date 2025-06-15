@@ -80,12 +80,11 @@ This site is automatically deployed via [Netlify](https://www.netlify.com/) from
 
 ## 🤝 Contact
 
-- Portfolio: [your-domain.com](https://your-domain.com)
-- Email: [your@email.com](mailto:your@email.com)
+- Portfolio: [jeremymhayes.com](https://jeremymhayes.com)
+- Email: [jeremyhayesmatthew@email.com](mailto:jeremyhayesmatthew@email.com)
 - GitHub: [AspectOV](https://github.com/AspectOV)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
 
 ---
 
-> © 2024 Jeremy / AspectOV. All rights reserved.
+> © 2025 Jeremy / AspectOV. All rights reserved.
 
