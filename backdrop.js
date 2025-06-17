@@ -1,99 +1,394 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const backdrop = document.querySelector('.animated-backdrop');
-  const canvas = document.createElement('canvas');
-  backdrop.appendChild(canvas);
+class AnimatedBackdrop {
+  constructor(options = {}) {
+    this.config = {
+      sectionSelector: "section",
+      backdropSelector: ".animated-backdrop",
+      minSpeed: 0.1,
+      maxSpeed: 0.3,
+      pulseIntensity: 0.1,
+      driftAmount: 5,
+      radiusMultiplier: 1.5,
+      targetFPS: 60,
+      adaptiveQuality: true,
+      respectMotionPreference: true,
+      ...options,
+    }
 
-  const ctx = canvas.getContext('2d');
-  let width, height, dpr = window.devicePixelRatio || 1;
+    this.state = {
+      width: 0,
+      height: 0,
+      dpr: window.devicePixelRatio || 1,
+      sections: [],
+      animationFrame: null,
+      lastTime: 0,
+      frameCount: 0,
+      lastFPSCheck: 0,
+      currentFPS: 60,
+      qualityScale: 1,
+      isVisible: true,
+      isReducedMotion: false,
+    }
 
-  const sections = [];
-  let animationFrame;
-  let lastTime = performance.now();
+    this.canvas = null
+    this.ctx = null
+    this.backdrop = null
+    this.resizeTimeout = null
+    this.observer = null
+    this.intersectionObserver = null
 
-  function resizeCanvas() {
-    width = canvas.width = window.innerWidth * dpr;
-    height = canvas.height = window.innerHeight * dpr;
-    canvas.style.width = window.innerWidth + 'px';
-    canvas.style.height = window.innerHeight + 'px';
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.scale(dpr, dpr);
+    this.init()
   }
 
-  function initSections() {
-    sections.length = 0;
-    document.querySelectorAll('section').forEach(section => {
-      const rect = section.getBoundingClientRect();
-      sections.push({
-        x: rect.left + rect.width / 2 + window.scrollX,
-        y: rect.top + rect.height / 2 + window.scrollY,
+  init() {
+    try {
+      this.checkMotionPreference()
+      this.setupCanvas()
+      this.setupEventListeners()
+      this.setupIntersectionObserver()
+      this.resizeCanvas()
+      this.initSections()
+      this.startAnimation()
+    } catch (error) {
+      console.error("Failed to initialize AnimatedBackdrop:", error)
+    }
+  }
+
+  checkMotionPreference() {
+    if (this.config.respectMotionPreference) {
+      const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+      this.state.isReducedMotion = mediaQuery.matches
+
+      mediaQuery.addEventListener("change", (e) => {
+        this.state.isReducedMotion = e.matches
+        if (e.matches) {
+          this.stopAnimation()
+        } else {
+          this.startAnimation()
+        }
+      })
+    }
+  }
+
+  setupCanvas() {
+    this.backdrop = document.querySelector(this.config.backdropSelector)
+    if (!this.backdrop) {
+      throw new Error(`Backdrop element not found: ${this.config.backdropSelector}`)
+    }
+
+    this.canvas = document.createElement("canvas")
+    this.canvas.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: -1;
+    `
+
+    this.backdrop.appendChild(this.canvas)
+    this.ctx = this.canvas.getContext("2d", {
+      alpha: true,
+      desynchronized: true,
+      powerPreference: "high-performance",
+    })
+
+    if (!this.ctx) {
+      throw new Error("Failed to get 2D context")
+    }
+  }
+
+  setupEventListeners() {
+    const handleResize = this.debounce(() => {
+      this.resizeCanvas()
+      this.initSections()
+    }, 100)
+
+    window.addEventListener("resize", handleResize, { passive: true })
+
+    // Handle visibility changes for performance
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        this.stopAnimation()
+      } else if (!this.state.isReducedMotion) {
+        this.startAnimation()
+      }
+    })
+
+    // Cleanup on page unload
+    window.addEventListener("beforeunload", () => {
+      this.destroy()
+    })
+  }
+
+  setupIntersectionObserver() {
+    // Only animate when backdrop is visible
+    this.intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          this.state.isVisible = entry.isIntersecting
+          if (!entry.isIntersecting) {
+            this.stopAnimation()
+          } else if (!this.state.isReducedMotion) {
+            this.startAnimation()
+          }
+        })
+      },
+      { threshold: 0.1 },
+    )
+
+    this.intersectionObserver.observe(this.backdrop)
+
+    // Watch for DOM changes
+    this.observer = new MutationObserver(
+      this.debounce(() => {
+        this.initSections()
+      }, 250),
+    )
+
+    this.observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["class", "style"],
+    })
+  }
+
+  resizeCanvas() {
+    const rect = this.backdrop.getBoundingClientRect()
+    this.state.width = rect.width
+    this.state.height = rect.height
+
+    const scaledWidth = this.state.width * this.state.dpr * this.state.qualityScale
+    const scaledHeight = this.state.height * this.state.dpr * this.state.qualityScale
+
+    this.canvas.width = scaledWidth
+    this.canvas.height = scaledHeight
+    this.canvas.style.width = `${this.state.width}px`
+    this.canvas.style.height = `${this.state.height}px`
+
+    this.ctx.setTransform(1, 0, 0, 1, 0, 0)
+    this.ctx.scale(this.state.dpr * this.state.qualityScale, this.state.dpr * this.state.qualityScale)
+  }
+
+  initSections() {
+    this.state.sections = []
+    const sections = document.querySelectorAll(this.config.sectionSelector)
+
+    sections.forEach((section, index) => {
+      const rect = section.getBoundingClientRect()
+      const backdropRect = this.backdrop.getBoundingClientRect()
+
+      // Calculate position relative to backdrop
+      const x = rect.left - backdropRect.left + rect.width / 2
+      const y = rect.top - backdropRect.top + rect.height / 2
+
+      this.state.sections.push({
+        id: index,
+        x,
+        y,
         width: rect.width,
         height: rect.height,
         progress: Math.random(),
-        speed: 0.1 + Math.random() * 0.2
-      });
-    });
+        speed: this.config.minSpeed + Math.random() * (this.config.maxSpeed - this.config.minSpeed),
+        hueOffset: Math.random() * 360,
+        phaseOffset: Math.random() * Math.PI * 2,
+      })
+    })
   }
 
-  function animate(now) {
-    const delta = (now - lastTime) / 1000;
-    lastTime = now;
+  animate(currentTime) {
+    if (!this.state.isVisible || this.state.isReducedMotion) {
+      return
+    }
 
-    ctx.clearRect(0, 0, width, height);
+    const deltaTime = Math.min((currentTime - this.state.lastTime) / 1000, 1 / 30) // Cap at 30fps minimum
+    this.state.lastTime = currentTime
 
-    const bgGradient = ctx.createLinearGradient(0, 0, 0, height / dpr);
-    bgGradient.addColorStop(0, 'rgba(10, 10, 10, 0.95)');
-    bgGradient.addColorStop(1, 'rgba(10, 10, 10, 0.98)');
-    ctx.fillStyle = bgGradient;
-    ctx.fillRect(0, 0, width / dpr, height / dpr);
+    // FPS monitoring and adaptive quality
+    if (this.config.adaptiveQuality) {
+      this.updateFPS(currentTime)
+      this.adjustQuality()
+    }
 
-    ctx.globalCompositeOperation = 'lighter';
+    this.render(currentTime, deltaTime)
 
-    sections.forEach(section => {
-      section.progress += delta * section.speed;
-      if (section.progress > 1) section.progress -= 1;
-
-      const hue = (section.progress * 360) % 360;
-      const pulse = Math.sin(section.progress * Math.PI * 2) * 0.5 + 0.5;
-      const radius = section.width * 1.5;
-
-      const driftX = Math.sin(now / 1000 + section.x) * 5;
-      const driftY = Math.cos(now / 1000 + section.y) * 5;
-      const cx = section.x + driftX;
-      const cy = section.y + driftY;
-
-      const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-      gradient.addColorStop(0, `hsla(${hue}, 100%, 60%, ${0.1 * pulse})`);
-      gradient.addColorStop(0.5, `hsla(${hue}, 100%, 60%, ${0.05 * pulse})`);
-      gradient.addColorStop(1, `hsla(${hue}, 100%, 60%, 0)`);
-
-      ctx.fillStyle = gradient;
-      ctx.beginPath();
-      ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-      ctx.fill();
-    });
-
-    ctx.globalCompositeOperation = 'source-over';
-
-    animationFrame = requestAnimationFrame(animate);
+    this.state.animationFrame = requestAnimationFrame((time) => this.animate(time))
   }
 
-  let resizeTimeout;
-  function handleResize() {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      resizeCanvas();
-      initSections();
-    }, 100);
+  updateFPS(currentTime) {
+    this.state.frameCount++
+
+    if (currentTime - this.state.lastFPSCheck >= 1000) {
+      this.state.currentFPS = this.state.frameCount
+      this.state.frameCount = 0
+      this.state.lastFPSCheck = currentTime
+    }
   }
 
-  resizeCanvas();
-  initSections();
-  animate(performance.now());
+  adjustQuality() {
+    const targetFPS = this.config.targetFPS
+    const currentFPS = this.state.currentFPS
 
-  window.addEventListener('resize', handleResize);
+    if (currentFPS < targetFPS * 0.8 && this.state.qualityScale > 0.5) {
+      this.state.qualityScale = Math.max(0.5, this.state.qualityScale - 0.1)
+      this.resizeCanvas()
+    } else if (currentFPS > targetFPS * 0.95 && this.state.qualityScale < 1) {
+      this.state.qualityScale = Math.min(1, this.state.qualityScale + 0.05)
+      this.resizeCanvas()
+    }
+  }
 
-  const observer = new MutationObserver(() => {
-    handleResize();
-  });
-  observer.observe(document.body, { childList: true, subtree: true });
-});
+  render(currentTime, deltaTime) {
+    // Clear canvas
+    this.ctx.clearRect(0, 0, this.state.width, this.state.height)
+
+    // Background gradient
+    this.renderBackground()
+
+    // Set blend mode for glowing effect
+    this.ctx.globalCompositeOperation = "lighter"
+
+    // Render sections
+    this.state.sections.forEach((section) => {
+      this.renderSection(section, currentTime, deltaTime)
+    })
+
+    // Reset blend mode
+    this.ctx.globalCompositeOperation = "source-over"
+  }
+
+  renderBackground() {
+    const gradient = this.ctx.createLinearGradient(0, 0, 0, this.state.height)
+    gradient.addColorStop(0, "rgba(10, 10, 10, 0.95)")
+    gradient.addColorStop(1, "rgba(10, 10, 10, 0.98)")
+
+    this.ctx.fillStyle = gradient
+    this.ctx.fillRect(0, 0, this.state.width, this.state.height)
+  }
+
+  renderSection(section, currentTime, deltaTime) {
+    // Update section progress
+    section.progress += deltaTime * section.speed
+    if (section.progress > 1) section.progress -= 1
+
+    // Calculate animation values
+    const timeInSeconds = currentTime / 1000
+    const hue = (section.hueOffset + section.progress * 360) % 360
+    const pulse = Math.sin(section.progress * Math.PI * 2) * 0.5 + 0.5
+    const radius = Math.max(section.width, section.height) * this.config.radiusMultiplier
+
+    // Smooth drift animation
+    const driftX = Math.sin(timeInSeconds * 0.5 + section.phaseOffset) * this.config.driftAmount
+    const driftY = Math.cos(timeInSeconds * 0.3 + section.phaseOffset) * this.config.driftAmount
+
+    const centerX = section.x + driftX
+    const centerY = section.y + driftY
+
+    // Create radial gradient
+    const gradient = this.ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius)
+
+    const intensity = this.config.pulseIntensity * pulse
+    gradient.addColorStop(0, `hsla(${hue}, 100%, 60%, ${intensity})`)
+    gradient.addColorStop(0.5, `hsla(${hue}, 100%, 60%, ${intensity * 0.5})`)
+    gradient.addColorStop(1, `hsla(${hue}, 100%, 60%, 0)`)
+
+    // Draw the glow
+    this.ctx.fillStyle = gradient
+    this.ctx.beginPath()
+    this.ctx.arc(centerX, centerY, radius, 0, Math.PI * 2)
+    this.ctx.fill()
+  }
+
+  startAnimation() {
+    if (!this.state.animationFrame && !this.state.isReducedMotion && this.state.isVisible) {
+      this.state.lastTime = performance.now()
+      this.animate(this.state.lastTime)
+    }
+  }
+
+  stopAnimation() {
+    if (this.state.animationFrame) {
+      cancelAnimationFrame(this.state.animationFrame)
+      this.state.animationFrame = null
+    }
+  }
+
+  // Utility methods
+  debounce(func, wait) {
+    let timeout
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout)
+        func(...args)
+      }
+      clearTimeout(timeout)
+      timeout = setTimeout(later, wait)
+    }
+  }
+
+  // Public API methods
+  updateConfig(newConfig) {
+    this.config = { ...this.config, ...newConfig }
+    this.initSections()
+  }
+
+  pause() {
+    this.stopAnimation()
+  }
+
+  resume() {
+    if (!this.state.isReducedMotion) {
+      this.startAnimation()
+    }
+  }
+
+  destroy() {
+    this.stopAnimation()
+
+    if (this.observer) {
+      this.observer.disconnect()
+    }
+
+    if (this.intersectionObserver) {
+      this.intersectionObserver.disconnect()
+    }
+
+    if (this.canvas && this.canvas.parentNode) {
+      this.canvas.parentNode.removeChild(this.canvas)
+    }
+
+    // Clear references
+    this.canvas = null
+    this.ctx = null
+    this.backdrop = null
+  }
+
+  // Getter for performance stats
+  getStats() {
+    return {
+      fps: this.state.currentFPS,
+      qualityScale: this.state.qualityScale,
+      sectionsCount: this.state.sections.length,
+      isVisible: this.state.isVisible,
+      isReducedMotion: this.state.isReducedMotion,
+    }
+  }
+}
+
+// Auto-initialize when DOM is ready
+document.addEventListener("DOMContentLoaded", () => {
+  // Check if backdrop element exists
+  if (document.querySelector(".animated-backdrop")) {
+    window.animatedBackdrop = new AnimatedBackdrop({
+      // Custom configuration can be passed here
+      pulseIntensity: 0.15,
+      driftAmount: 8,
+      adaptiveQuality: true,
+      respectMotionPreference: true,
+    })
+  }
+})
+
+// Export for module usage
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = AnimatedBackdrop
+}
