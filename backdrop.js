@@ -258,8 +258,9 @@ class AnimatedBackdrop {
 
   renderBackground() {
     const gradient = this.ctx.createLinearGradient(0, 0, 0, this.state.height)
-    gradient.addColorStop(0, "rgba(10, 10, 10, 0.95)")
-    gradient.addColorStop(1, "rgba(10, 10, 10, 0.98)")
+    gradient.addColorStop(0, "rgba(5, 15, 25, 0.95)") // Dark blue-teal
+    gradient.addColorStop(0.5, "rgba(8, 20, 30, 0.97)") // Deeper blue-teal
+    gradient.addColorStop(1, "rgba(10, 25, 35, 0.98)") // Darkest blue-teal
 
     this.ctx.fillStyle = gradient
     this.ctx.fillRect(0, 0, this.state.width, this.state.height)
@@ -272,7 +273,13 @@ class AnimatedBackdrop {
 
     // Calculate animation values
     const timeInSeconds = currentTime / 1000
-    const hue = (section.hueOffset + section.progress * 360) % 360
+
+    // Use teal/blue color range instead of full hue spectrum
+    const blueHue = 200 // Base blue hue
+    const tealHue = 180 // Teal hue
+    const hueRange = 40 // Range between teal and blue
+    const hue = tealHue + (Math.sin(section.progress * Math.PI * 2) * 0.5 + 0.5) * hueRange
+
     const pulse = Math.sin(section.progress * Math.PI * 2) * 0.5 + 0.5
     const radius = Math.max(section.width, section.height) * this.config.radiusMultiplier
 
@@ -283,13 +290,17 @@ class AnimatedBackdrop {
     const centerX = section.x + driftX
     const centerY = section.y + driftY
 
-    // Create radial gradient
+    // Create radial gradient with teal/blue colors
     const gradient = this.ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius)
 
     const intensity = this.config.pulseIntensity * pulse
-    gradient.addColorStop(0, `hsla(${hue}, 100%, 60%, ${intensity})`)
-    gradient.addColorStop(0.5, `hsla(${hue}, 100%, 60%, ${intensity * 0.5})`)
-    gradient.addColorStop(1, `hsla(${hue}, 100%, 60%, 0)`)
+    const saturation = 70 + pulse * 30 // Vary saturation for more depth
+    const lightness = 50 + pulse * 20 // Vary lightness for glow effect
+
+    gradient.addColorStop(0, `hsla(${hue}, ${saturation}%, ${lightness}%, ${intensity})`)
+    gradient.addColorStop(0.3, `hsla(${hue}, ${saturation}%, ${lightness - 10}%, ${intensity * 0.7})`)
+    gradient.addColorStop(0.6, `hsla(${hue}, ${saturation - 20}%, ${lightness - 20}%, ${intensity * 0.3})`)
+    gradient.addColorStop(1, `hsla(${hue}, ${saturation - 30}%, ${lightness - 30}%, 0)`)
 
     // Draw the glow
     this.ctx.fillStyle = gradient
