@@ -253,3 +253,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+// Disable right-click
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+// Disable common dev tool shortcuts
+document.addEventListener('keydown', function(e) {
+  // Disable F12
+  if (e.key === "F12") {
+    e.preventDefault();
+  }
+
+  // Disable Ctrl+U, Ctrl+S, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+  if (
+    (e.ctrlKey && e.key.toLowerCase() === 'u') ||
+    (e.ctrlKey && e.key.toLowerCase() === 's') ||
+    (e.ctrlKey && e.shiftKey && ['i', 'j', 'c'].includes(e.key.toLowerCase()))
+  ) {
+    e.preventDefault();
+  }
+});
+
