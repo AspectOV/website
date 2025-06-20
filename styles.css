@@ -1139,3 +1139,17 @@ img {
     padding-left: var(--space-md);
   }
 }
+
+  .styled-link {
+    text-decoration: none;
+    color: inherit;
+    padding: 0.5em 1em;
+    background-color: #eee;
+    border-radius: 8px;
+    display: inline-block;
+    transition: background-color 0.2s ease;
+  }
+
+  .styled-link:hover {
+    background-color: #ddd;
+  }
