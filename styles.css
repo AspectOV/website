@@ -82,6 +82,7 @@ body {
   color: var(--color-text-primary);
   background: var(--color-bg-primary);
   transition: background-color var(--transition-normal);
+  cursor: url('images/dot_cursor.png') 8 8, auto;
 }
 
 main {
