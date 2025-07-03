@@ -1,23 +1,41 @@
-<style>
-  .typed {
-    font-family: 'JetBrains Mono', monospace;
-    color: white;
-    font-size: 80px;
-    width: 9ch;
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 3px solid #fff;
-    animation: typing 2s steps(9), blink 0.75s step-end infinite;
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JH Typing Logo</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
-  @keyframes typing {
-    from { width: 0 }
-    to { width: 9ch }
-  }
+    .typed {
+      font-family: 'JetBrains Mono', monospace;
+      color: white;
+      font-size: 80px;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid white;
+      width: 0ch;
+      animation: typing 2.5s steps(8) forwards, blink 0.75s step-end infinite;
+    }
 
-  @keyframes blink {
-    50% { border-color: transparent }
-  }
-</style>
+    @keyframes typing {
+      from { width: 0ch; }
+      to { width: 8ch; }
+    }
 
-<div class="typed">&lt; JH /&gt;</div>
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+  </style>
+</head>
+<body>
+  <div class="typed">&lt; JH /&gt;</div>
+</body>
+</html>
