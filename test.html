@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>JH Typing Logo</title>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <title>JH Typing Logo - Enhanced</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       background-color: #000;
@@ -12,31 +12,214 @@
       align-items: center;
       height: 100vh;
       margin: 0;
+      overflow: hidden;
+      position: relative;
     }
-
+    
+    /* Subtle background particles */
+    .bg-particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0.1;
+      z-index: 0;
+    }
+    
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .particle:nth-child(1) { left: 20%; top: 20%; animation-delay: 0s; }
+    .particle:nth-child(2) { left: 80%; top: 30%; animation-delay: 2s; }
+    .particle:nth-child(3) { left: 60%; top: 80%; animation-delay: 4s; }
+    .particle:nth-child(4) { left: 30%; top: 70%; animation-delay: 1s; }
+    .particle:nth-child(5) { left: 90%; top: 60%; animation-delay: 3s; }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) opacity(0.1); }
+      50% { transform: translateY(-20px) opacity(0.3); }
+    }
+    
+    .logo-container {
+      position: relative;
+      z-index: 1;
+    }
+    
     .typed {
       font-family: 'JetBrains Mono', monospace;
-      letter-spacing: 1px; /* or 1.5px */
-      color: white;
-      font-size: 80px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #fff;
+      font-size: clamp(40px, 8vw, 80px);
       white-space: nowrap;
-      overflow: hidden;
-      border-right: 3px solid white;
+      overflow: visible;
+      position: relative;
       width: 0ch;
-      animation: typing 2.5s steps(8) forwards, blink 0.75s step-end infinite;
+      animation: typing 3s steps(8) forwards;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 255, 255, 0.3), 0 0 60px rgba(255, 255, 255, 0.1);
     }
-
+    
+    /* Enhanced cursor with glow effect */
+    .typed::after {
+      content: '';
+      position: absolute;
+      right: -3px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(45deg, #00ff88, #00ccff);
+      animation: blink 1s step-end infinite, glow 2s ease-in-out infinite alternate;
+      filter: blur(0px);
+      box-shadow: 
+        0 0 10px rgba(0, 255, 136, 0.7),
+        0 0 20px rgba(0, 255, 136, 0.5),
+        0 0 30px rgba(0, 204, 255, 0.3),
+        0 0 40px rgba(0, 204, 255, 0.2);
+    }
+    
+    /* Typewriter effect */
     @keyframes typing {
-      from { width: 0ch; }
-      to { width: 8ch; }
+      0% { width: 0ch; }
+      40% { width: 0ch; }
+      100% { width: 8ch; }
     }
-
+    
+    /* Enhanced blinking cursor */
     @keyframes blink {
-      50% { border-color: transparent; }
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+    
+    /* Subtle glow animation */
+    @keyframes glow {
+      0% { 
+        box-shadow: 
+          0 0 5px rgba(0, 255, 136, 0.5),
+          0 0 10px rgba(0, 255, 136, 0.3),
+          0 0 15px rgba(0, 204, 255, 0.2);
+      }
+      100% { 
+        box-shadow: 
+          0 0 15px rgba(0, 255, 136, 0.8),
+          0 0 25px rgba(0, 255, 136, 0.6),
+          0 0 35px rgba(0, 204, 255, 0.4),
+          0 0 45px rgba(0, 204, 255, 0.2);
+      }
+    }
+    
+    /* Character reveal effect */
+    .typed .char {
+      opacity: 0;
+      animation: charReveal 0.1s forwards;
+    }
+    
+    @keyframes charReveal {
+      to { opacity: 1; }
+    }
+    
+    /* Hover effect for interactivity */
+    .logo-container:hover .typed {
+      transform: scale(1.05);
+      transition: transform 0.3s ease;
+      text-shadow: 
+        0 0 30px rgba(255, 255, 255, 0.8),
+        0 0 50px rgba(255, 255, 255, 0.6),
+        0 0 70px rgba(255, 255, 255, 0.4),
+        0 0 90px rgba(255, 255, 255, 0.2);
+    }
+    
+    .logo-container:hover .typed::after {
+      animation: blink 0.5s step-end infinite, glow 1s ease-in-out infinite alternate;
+      box-shadow: 
+        0 0 15px rgba(0, 255, 136, 0.9),
+        0 0 30px rgba(0, 255, 136, 0.7),
+        0 0 45px rgba(0, 204, 255, 0.5),
+        0 0 60px rgba(0, 204, 255, 0.3);
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .typed {
+        font-size: 60px;
+        letter-spacing: 1px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .typed {
+        font-size: 40px;
+        letter-spacing: 0.5px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="typed">&lt; JH /&gt;</div>
+  <div class="bg-particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+  
+  <div class="logo-container">
+    <div class="typed">&lt; JH /&gt;</div>
+  </div>
+  
+  <script>
+    // Enhanced typing effect with sound simulation
+    document.addEventListener('DOMContentLoaded', function() {
+      const typedElement = document.querySelector('.typed');
+      const text = '< JH />';
+      
+      // Add subtle screen shake effect during typing
+      let shakeTimeout;
+      
+      function addShakeEffect() {
+        document.body.style.animation = 'shake 0.1s ease-in-out';
+        clearTimeout(shakeTimeout);
+        shakeTimeout = setTimeout(() => {
+          document.body.style.animation = '';
+        }, 100);
+      }
+      
+      // Add shake keyframes
+      const shakeKeyframes = `
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          25% { transform: translateX(-0.5px); }
+          75% { transform: translateX(0.5px); }
+        }
+      `;
+      
+      const styleSheet = document.createElement('style');
+      styleSheet.textContent = shakeKeyframes;
+      document.head.appendChild(styleSheet);
+      
+      // Simulate typing sound effect visually
+      const typingInterval = setInterval(() => {
+        const currentWidth = parseFloat(getComputedStyle(typedElement).width);
+        const maxWidth = typedElement.scrollWidth;
+        
+        if (currentWidth < maxWidth * 0.9) {
+          addShakeEffect();
+        } else {
+          clearInterval(typingInterval);
+        }
+      }, 300);
+      
+      // Add restart functionality on click
+      typedElement.addEventListener('click', function() {
+        typedElement.style.animation = 'none';
+        typedElement.offsetHeight; // Trigger reflow
+        typedElement.style.animation = 'typing 3s steps(8) forwards';
+      });
+    });
+  </script>
 </body>
 </html>
