@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -15,128 +16,131 @@
       overflow: hidden;
       position: relative;
     }
-    
-    /* Subtle background particles */
-    .bg-particles {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      opacity: 0.1;
-      z-index: 0;
-    }
-    
-    .particle {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: #fff;
-      border-radius: 50%;
-      animation: float 6s ease-in-out infinite;
-    }
-    
-    .particle:nth-child(1) { left: 20%; top: 20%; animation-delay: 0s; }
-    .particle:nth-child(2) { left: 80%; top: 30%; animation-delay: 2s; }
-    .particle:nth-child(3) { left: 60%; top: 80%; animation-delay: 4s; }
-    .particle:nth-child(4) { left: 30%; top: 70%; animation-delay: 1s; }
-    .particle:nth-child(5) { left: 90%; top: 60%; animation-delay: 3s; }
-    
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) opacity(0.1); }
-      50% { transform: translateY(-20px) opacity(0.3); }
-    }
-    
-    .logo-container {
-      position: relative;
-      z-index: 1;
-    }
-    
-    .typed {
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-      letter-spacing: 6px;
-      color: #fff;
-      font-size: clamp(40px, 8vw, 80px);
-      white-space: nowrap;
-      overflow: hidden;
-      position: relative;
-      width: 0ch;
-      animation: typing 3s steps(8) forwards;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-    }
-    
-    /* Enhanced cursor with minimal glow */
-    .typed::after {
-      content: '';
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: #fff;
-      animation: blink 1s step-end infinite, glow 2s ease-in-out infinite alternate;
-      filter: blur(0px);
-      box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
-    }
-    
-    /* Typewriter effect */
-    @keyframes typing {
-      0% { width: 0ch; }
-      40% { width: 0ch; }
-      100% { width: 8ch; }
-    }
-    
-    /* Enhanced blinking cursor */
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
-    }
-    
-    /* Subtle glow animation */
-    @keyframes glow {
-      0% { 
-        box-shadow: 0 0 3px rgba(255, 255, 255, 0.2);
-      }
-      100% { 
-        box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
-      }
-    }
-    
-    /* Character reveal effect */
-    .typed .char {
-      opacity: 0;
-      animation: charReveal 0.1s forwards;
-    }
-    
-    @keyframes charReveal {
-      to { opacity: 1; }
-    }
-    
-    /* Hover effect for interactivity */
-    .logo-container:hover .typed {
-      transform: scale(1.05);
-      transition: transform 0.3s ease;
-      text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-    }
-    
-    .logo-container:hover .typed::after {
-      animation: blink 0.5s step-end infinite, glow 1s ease-in-out infinite alternate;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    }
-    
-    /* Responsive design */
-    @media (max-width: 768px) {
-      .typed {
-        font-size: 60px;
-        letter-spacing: 1px;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .typed {
-        font-size: 40px;
-        letter-spacing: 0.5px;
-      }
-    }
+
+```
+/* Subtle background particles */
+.bg-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #fff;
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.particle:nth-child(1) { left: 20%; top: 20%; animation-delay: 0s; }
+.particle:nth-child(2) { left: 80%; top: 30%; animation-delay: 2s; }
+.particle:nth-child(3) { left: 60%; top: 80%; animation-delay: 4s; }
+.particle:nth-child(4) { left: 30%; top: 70%; animation-delay: 1s; }
+.particle:nth-child(5) { left: 90%; top: 60%; animation-delay: 3s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) opacity(0.1); }
+  50% { transform: translateY(-20px) opacity(0.3); }
+}
+
+.logo-container {
+  position: relative;
+  z-index: 1;
+}
+
+.typed {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  letter-spacing: 6px;
+  color: #fff;
+  font-size: clamp(40px, 8vw, 80px);
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+  width: 0ch;
+  animation: typing 3s steps(9) forwards;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Enhanced cursor with minimal glow */
+.typed::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #fff;
+  animation: blink 1s step-end infinite, glow 2s ease-in-out infinite alternate;
+  filter: blur(0px);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+/* Typewriter effect - updated to 9 characters */
+@keyframes typing {
+  0% { width: 0ch; }
+  40% { width: 0ch; }
+  100% { width: 9ch; }
+}
+
+/* Enhanced blinking cursor */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Subtle glow animation */
+@keyframes glow {
+  0% { 
+    box-shadow: 0 0 3px rgba(255, 255, 255, 0.2);
+  }
+  100% { 
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* Character reveal effect */
+.typed .char {
+  opacity: 0;
+  animation: charReveal 0.1s forwards;
+}
+
+@keyframes charReveal {
+  to { opacity: 1; }
+}
+
+/* Hover effect for interactivity */
+.logo-container:hover .typed {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+.logo-container:hover .typed::after {
+  animation: blink 0.5s step-end infinite, glow 1s ease-in-out infinite alternate;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .typed {
+    font-size: 60px;
+    letter-spacing: 1px;
+  }
+}
+
+@media (max-width: 480px) {
+  .typed {
+    font-size: 40px;
+    letter-spacing: 0.5px;
+  }
+}
+```
+
   </style>
 </head>
 <body>
@@ -147,11 +151,11 @@
     <div class="particle"></div>
     <div class="particle"></div>
   </div>
-  
+
   <div class="logo-container">
     <div class="typed">&lt; JH /&gt;</div>
   </div>
-  
+
   <script>
     // Enhanced typing effect with sound simulation
     document.addEventListener('DOMContentLoaded', function() {
@@ -198,9 +202,10 @@
       typedElement.addEventListener('click', function() {
         typedElement.style.animation = 'none';
         typedElement.offsetHeight; // Trigger reflow
-        typedElement.style.animation = 'typing 3s steps(8) forwards';
+        typedElement.style.animation = 'typing 3s steps(9) forwards';
       });
     });
   </script>
+
 </body>
 </html>
