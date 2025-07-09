@@ -3,13 +3,13 @@
   
   <!-- Main Pages Sitemap -->
   <sitemap>
-    <loc>https://jeremymhayes.com/sitemap.xml</loc>
+    <loc>https://jeremymhayes.com/sitemaps/sitemap.xml</loc>
     <lastmod>2024-12-19</lastmod>
   </sitemap>
   
   <!-- Images Sitemap -->
   <sitemap>
-    <loc>https://jeremymhayes.com/sitemap-images.xml</loc>
+    <loc>https://jeremymhayes.com/sitemaps/sitemap-images.xml</loc>
     <lastmod>2024-12-19</lastmod>
   </sitemap>
   
