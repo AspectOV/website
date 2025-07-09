@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Website Logo -->
+  <url>
+    <loc>https://jeremymhayes.com/</loc>
+    <image:image>
+      <image:loc>https://jeremymhayes.com/images/websitelogo.png</image:loc>
+      <image:title>Jeremy M. Hayes Portfolio Logo</image:title>
+      <image:caption>Professional developer portfolio logo representing Jeremy M. Hayes</image:caption>
+      <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+    </image:image>
+  </url>
+  
+  <!-- Project Images -->
+  <url>
+    <loc>https://jeremymhayes.com/projects.html</loc>
+    <image:image>
+      <image:loc>https://jeremymhayes.com/images/roblox-game.png</image:loc>
+      <image:title>Roblox Game Development Project</image:title>
+      <image:caption>Showcase of Roblox game development projects and achievements</image:caption>
+      <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://jeremymhayes.com/images/unity-game.jpg</image:loc>
+      <image:title>Unity Game Development Project</image:title>
+      <image:caption>Unity software development and game creation projects</image:caption>
+      <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://jeremymhayes.com/images/web-dev-project.png</image:loc>
+      <image:title>Web Development Project</image:title>
+      <image:caption>Web development portfolio showcasing responsive and interactive websites</image:caption>
+      <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+    </image:image>
+  </url>
+  
+  <!-- Resume Image -->
+  <url>
+    <loc>https://jeremymhayes.com/about.html</loc>
+    <image:image>
+      <image:loc>https://jeremymhayes.com/images/resume.jpg</image:loc>
+      <image:title>Jeremy M. Hayes Resume</image:title>
+      <image:caption>Professional resume highlighting skills, experience, and qualifications</image:caption>
+      <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+    </image:image>
+  </url>
+  
+  <!-- Cursor Image -->
+  <url>
+    <loc>https://jeremymhayes.com/</loc>
+    <image:image>
+      <image:loc>https://jeremymhayes.com/images/dot_cursor.png</image:loc>
+      <image:title>Custom Cursor Design</image:title>
+      <image:caption>Custom cursor design element for enhanced user experience</image:caption>
+      <image:license>https://creativecommons.org/licenses/by/4.0/</image:license>
+    </image:image>
+  </url>
+  
+</urlset> 
