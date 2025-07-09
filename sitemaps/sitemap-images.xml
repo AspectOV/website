@@ -4,7 +4,7 @@
   
   <!-- Website Logo -->
   <url>
-    <loc>https://jeremymhayes.com/</loc>
+    <loc>https://jeremymhayes.com/html/index.html</loc>
     <image:image>
       <image:loc>https://jeremymhayes.com/images/websitelogo.png</image:loc>
       <image:title>Jeremy M. Hayes Portfolio Logo</image:title>
@@ -15,7 +15,7 @@
   
   <!-- Project Images -->
   <url>
-    <loc>https://jeremymhayes.com/projects.html</loc>
+    <loc>https://jeremymhayes.com/html/projects.html</loc>
     <image:image>
       <image:loc>https://jeremymhayes.com/images/roblox-game.png</image:loc>
       <image:title>Roblox Game Development Project</image:title>
@@ -38,7 +38,7 @@
   
   <!-- Resume Image -->
   <url>
-    <loc>https://jeremymhayes.com/about.html</loc>
+    <loc>https://jeremymhayes.com/html/about.html</loc>
     <image:image>
       <image:loc>https://jeremymhayes.com/images/resume.jpg</image:loc>
       <image:title>Jeremy M. Hayes Resume</image:title>
@@ -49,7 +49,7 @@
   
   <!-- Cursor Image -->
   <url>
-    <loc>https://jeremymhayes.com/</loc>
+    <loc>https://jeremymhayes.com/html/index.html</loc>
     <image:image>
       <image:loc>https://jeremymhayes.com/images/dot_cursor.png</image:loc>
       <image:title>Custom Cursor Design</image:title>

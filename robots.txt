@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://jeremymhayes.com/sitemap-index.xml
+Sitemap: https://jeremymhayes.com/sitemaps/sitemap-index.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
